@@ -44,7 +44,7 @@ export default function Header() {
           )}
         </nav>
 
-        <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden hover:underline">
+        <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden">
           {menuOpen ? 'Close' : 'Menu'}
         </button>
       </header>
