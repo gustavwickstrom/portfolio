@@ -17,7 +17,7 @@ export default function CustomCursor() {
 
   return (
     <div
-      className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference"
+      className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference hidden lg:block"
       style={{
         transform: `translate(${pos.x - 16}px, ${pos.y - 16}px)`,
       }}
@@ -26,5 +26,6 @@ export default function CustomCursor() {
         <img src="/cursor.svg" alt="cursor" className="w-8 h-8" />
       </div>
     </div>
+
   );
 }
