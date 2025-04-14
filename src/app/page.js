@@ -6,7 +6,7 @@ import PageWrapper from './components/PageWrapper';
 export default function Home() {
   return (
     <PageWrapper>
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 lg:gap-y-3">
+    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-3 lg:gap-y-3">
       {projects.map(({ title, slug, image, description }) => (
         <Link
           key={slug}
