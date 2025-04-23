@@ -1,41 +1,72 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import projects from '../data/projects';
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import catalogue from '../data/catalogue';
 import PageWrapper from './components/PageWrapper';
+import LightboxOverlay from './components/LightboxOverlay';
 
 export default function Home() {
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [visibleIndexes, setVisibleIndexes] = useState([]);
+  const imageRefs = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.dataset.index);
+            setVisibleIndexes((prev) => [...new Set([...prev, index])]);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    imageRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const openLightbox = (index) => {
+    setSelectedIndex(index);
+  };
+
+  const closeLightbox = () => {
+    setSelectedIndex(null);
+  };
+
   return (
     <PageWrapper>
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-3 lg:gap-y-3">
-      {projects.map(({ title, slug, image, description }) => (
-        <Link
-          key={slug}
-          href={`/case/${slug}`}
-          className="block group w-full"
-        >
-          <div className="relative w-full aspect-[16/9] overflow-hidden">
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+      <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7 gap-10 px-4 py-20 max-w-[2000px] mx-auto mt-20">
+        {catalogue.map(({ src, title, label }, index) => (
+          <div
+            key={index}
+            ref={(el) => (imageRefs.current[index] = el)}
+            data-index={index}
+            className={`flex items-end justify-center transition-opacity duration-700 ease-out ${
+              visibleIndexes.includes(index) ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img
+              src={src}
+              alt={label}
+              onClick={() => openLightbox(index)}
+              className="h-[200px] w-auto object-scale-down hover:opacity-80"
             />
-
-            {/* Overlay på hover för desktop */}
-            <div className="hidden lg:flex absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-center text-white text-center px-4">
-              <div>
-                <p className="text-base font-semibold">{title}</p>
-              </div>
-            </div>
           </div>
+        ))}
+      </section>
 
-          {/* Text under bilden (mobil / tablet) */}
-          <div className="mt-2 text-center lg:hidden">
-            <p className="text-base font-medium">{title}</p>
-          </div>
-        </Link>
-      ))}
-    </section>
+      {selectedIndex !== null && (
+        <LightboxOverlay
+          images={catalogue}
+          initialIndex={selectedIndex}
+          onClose={closeLightbox}
+        />
+      )}
     </PageWrapper>
   );
 }

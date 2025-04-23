@@ -3,17 +3,22 @@ import { useEffect, useState } from 'react';
 
 export default function CustomCursor() {
   const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [hasMoved, setHasMoved] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); // bara kör på client-side
+    setIsClient(true);
 
-    const move = (e) => setPos({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', move);
-    return () => window.removeEventListener('mousemove', move);
-  }, []);
+    const handleMove = (e) => {
+      setPos({ x: e.clientX, y: e.clientY });
+      if (!hasMoved) setHasMoved(true);
+    };
 
-  if (!isClient) return null; // rendera inget på servern (fixar hydration error)
+    window.addEventListener('mousemove', handleMove);
+    return () => window.removeEventListener('mousemove', handleMove);
+  }, [hasMoved]);
+
+  if (!isClient || !hasMoved) return null; // Visa inte innan musen rört sig
 
   return (
     <div
@@ -26,6 +31,5 @@ export default function CustomCursor() {
         <img src="/cursor.svg" alt="cursor" className="w-8 h-8" />
       </div>
     </div>
-
   );
 }

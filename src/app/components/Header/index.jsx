@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 const links = [
-  { href: '/', label: 'Work' },
-  { href: '/info', label: 'Info' },
+  { href: '/', label: 'work' },
+  { href: '/info', label: 'info' },
   { href: 'https://www.instagram.com/gustavwickstrom/', label: 'ig', external: true },
   { href: 'https://www.youtube.com/@gustavwickstroms', label: 'yt', external: true },
 ];
@@ -17,20 +17,19 @@ export default function Header() {
 
   const handleNav = (href, external) => {
     if (external) return;
-
-    setMenuOpen(false); // start fade-out
-    setTimeout(() => router.push(href), 300); // wait for animation
+    setMenuOpen(false);
+    setTimeout(() => router.push(href), 300);
   };
 
   return (
     <>
-      {/* HEADER */}
-      <header className="flex justify-between items-center py-4 mb-6 z-50 relative">
+      {/* FIXED HEADER */}
+      <header className="fixed top-0 left-0 right-0 z-50 w-full flex justify-between items-center px-12 py-8">
         <Link href="/" className="text-base hover:opacity-30 transition-opacity duration-200">
-          Gustav Wickström
+          GUSTAV WICKSTRÖM
         </Link>
 
-        <nav className="hidden lg:flex gap-6">
+        <nav className="hidden lg:flex gap-56">
           {links.map(({ href, label, external }) =>
             external ? (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -45,9 +44,12 @@ export default function Header() {
         </nav>
 
         <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden">
-          {menuOpen ? 'Close' : 'Menu'}
+          {menuOpen ? 'CLOSE' : 'MENU'}
         </button>
       </header>
+
+      {/* SPACER to offset fixed header height */}
+      <div className="h-16" />
 
       {/* MOBILE MENU */}
       <div
