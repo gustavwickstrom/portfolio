@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
     "postcss": "^8",

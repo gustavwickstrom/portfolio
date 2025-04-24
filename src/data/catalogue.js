@@ -1,5 +1,11 @@
 const catalogue = [
-    {
+  {
+    type: "video",
+    src: "/videos/andreas.mp4", // se till att denna fil finns i public/videos
+    title: "gravity reversed, it all ascends.",
+    label: "andreas.mp4"
+  },  
+  {
       src: "/images/film/R1-02110-0002.jpg",
       title: "Ultramax",
       label: "R1-02110-0002.jpg",
@@ -40,6 +46,12 @@ const catalogue = [
       title: "Ultramax",
       label: "R1-02110-0010.jpg",
     },
+    {
+      type: "video",
+      src: "/videos/oliver.mp4", // se till att denna fil finns i public/videos
+      title: "gravity reversed, it all ascends.",
+      label: "oliver.mp4"
+    },  
     {
       src: "/images/film/R1-02110-0011.jpg",
       title: "Ultramax",

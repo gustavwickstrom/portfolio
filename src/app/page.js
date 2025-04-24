@@ -30,18 +30,13 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  const openLightbox = (index) => {
-    setSelectedIndex(index);
-  };
-
-  const closeLightbox = () => {
-    setSelectedIndex(null);
-  };
+  const openLightbox = (index) => setSelectedIndex(index);
+  const closeLightbox = () => setSelectedIndex(null);
 
   return (
     <PageWrapper>
-      <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7 gap-10 px-4 py-20 max-w-[2000px] mx-auto mt-20">
-        {catalogue.map(({ src, title, label }, index) => (
+      <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7 gap-x-20 gap-y-10 px-4 py-20 max-w-[2000px] mx-auto mt-20">
+        {catalogue.map(({ src, title, label, type = 'image' }, index) => (
           <div
             key={index}
             ref={(el) => (imageRefs.current[index] = el)}
@@ -50,12 +45,27 @@ export default function Home() {
               visibleIndexes.includes(index) ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <img
-              src={src}
-              alt={label}
+            <div
               onClick={() => openLightbox(index)}
-              className="h-[200px] w-auto object-scale-down hover:opacity-80"
-            />
+              className="hover:opacity-80 transition-opacity"
+            >
+              {type === 'video' ? (
+                <video
+                  src={src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="h-[200px] w-auto object-contain"
+                />
+              ) : (
+                <img
+                  src={src}
+                  alt={label}
+                  className="h-[200px] w-auto object-contain"
+                />
+              )}
+            </div>
           </div>
         ))}
       </section>

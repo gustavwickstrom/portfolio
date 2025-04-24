@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import aspectRatio from '@tailwindcss/aspect-ratio';
+
 export default {
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,7 +17,7 @@ export default {
         base: ['13px', { lineHeight: '1.6', fontWeight: '400' }],
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'], // ← denna rad är viktig!
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['Consolas', 'Courier New', 'monospace'],
       },
       spacing: {
@@ -26,5 +28,6 @@ export default {
   },
   plugins: [
     require('tailwind-scrollbar-hide'),
+    aspectRatio, // ← här lägger vi till pluginen!
   ],
 };
