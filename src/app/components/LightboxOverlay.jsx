@@ -9,9 +9,9 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
   const [isClosing, setIsClosing] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
 
-  const isScrollingRef = useRef(false); // ✅ Korrekt placerad hook
+  const isScrollingRef = useRef(false);
 
-  const videoRef = useRef(null); // ✅ Här är den!
+  const videoRef = useRef(null);
 
   const media = images[currentIndex];
 

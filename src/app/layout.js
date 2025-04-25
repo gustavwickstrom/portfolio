@@ -14,10 +14,9 @@ export default function RootLayout({ children }) {
       <body className="bg-background text-foreground text-base">
         <CustomCursor />
 
-        <div className="px-4 py-2 lg:px-14 xl:px-8">
+        <div className="px-4 py-2 lg:px-8">
           <Header />
           <main>{children}</main>
-          <Footer />
         </div>
       </body>
     </html>
