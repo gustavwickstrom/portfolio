@@ -50,7 +50,7 @@ export default function Home() {
                           gap-x-4 lg:gap-x-20 
                           lg:gap-y-4 
                           mt-10 lg:mt-32
-                          mx-4 xl:mx-20
+                          xl:mx-20
                           mb-20
                           "
                           
