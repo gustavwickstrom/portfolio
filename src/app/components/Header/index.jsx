@@ -21,6 +21,15 @@ export default function Header() {
     }
   }, []);
 
+  // Scroll lock när meny är öppen
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [menuOpen]);
+
   const toggleTheme = () => {
     const html = document.documentElement;
     if (html.classList.contains("dark")) {
@@ -60,10 +69,10 @@ export default function Header() {
         {/* Column 2: Navigation – hidden until lg */}
         <div className="flex flex-col hidden lg:flex">
           <Link href="/" className={linkClass("/")}>
-           IMAGERY
+            IMAGERY
           </Link>
           <Link href="/film" className={linkClass("/film")}>
-          FILMS
+            FILMS
           </Link>
         </div>
 
@@ -122,52 +131,80 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       {menuOpen && (
+        <div className="fixed inset-0 bg-background text-foreground z-50 flex flex-col lg:hidden text-base text-center">
+          {/* Mobil-header i menyn */}
+          <div className="w-full px-6 pt-5 pb-6 grid grid-cols-2 text-white mix-blend-difference gap-8">
+            <div className="flex flex-col">
+              <Link
+                href="/"
+                className="text-big hover:opacity-50 transition-opacity duration-200"
+              >
+                GUSTAV WICKSTRÖM
+              </Link>
+            </div>
 
+            <div className="flex justify-end items-start gap-6">
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="opacity-50 hover:opacity-100 transition-all duration-200"
+              >
+                CLOSE
+              </button>
+              <span
+                onClick={toggleTheme}
+                className="opacity-50 hover:opacity-100 transition-opacity duration-200"
+              >
+                {isDark ? "○ ●" : "● ○"}
+              </span>
+            </div>
+          </div>
 
-        <div className="fixed inset-0 bg-background text-foreground z-50 flex flex-col items-center justify-center text-base lg:hidden">
-          <Link
-            href="/"
-            onClick={() => handleNav("/")}
-            className={
-              'linkClass("/") border-t border-[color:var(--foreground)] w-full mx-4 p-5'
-            }
-          >
-            IMAGERY
-          </Link>
-          <Link
-            href="/film"
-            onClick={() => handleNav("/film")}
-            className={
-              'linkClass("/film") border-t border-[color:var(--foreground)] w-full p-5'
-            }
-          >
-            FILMS
-          </Link>
-          <Link
-            href="/info"
-            onClick={() => handleNav("/info")}
-            className={
-              'linkClass("/info") border-t border-[color:var(--foreground)] w-full p-5'
-            }
-          >
-            INFO
-          </Link>
-          <a
-            href="https://www.instagram.com/gustavwickstrom/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-t border-[color:var(--foreground)] w-full p-5"
-          >
-            INSTAGRAM
-          </a>
-          <a
-            href="https://www.youtube.com/@gustavwickstroms"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-b border-t border-[color:var(--foreground)] w-full p-5"
-          >
-            YOUTUBE
-          </a>
+          {/* Menylänkar med borders och margin */}
+          <div className="w-full flex flex-col px-4">
+            <Link
+              href="/"
+              onClick={() => handleNav("/")}
+              className={`${linkClass(
+                "/"
+              )} border-t border-[color:var(--foreground)] w-full p-5`}
+            >
+              IMAGERY
+            </Link>
+            <Link
+              href="/film"
+              onClick={() => handleNav("/film")}
+              className={`${linkClass(
+                "/film"
+              )} border-t border-[color:var(--foreground)] w-full p-5`}
+            >
+              FILMS
+            </Link>
+            <Link
+              href="/info"
+              onClick={() => handleNav("/info")}
+              className={`${linkClass(
+                "/info"
+              )} border-t border-[color:var(--foreground)] w-full p-5`}
+            >
+              INFO
+            </Link>
+            <a
+              href="https://www.instagram.com/gustavwickstrom/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-t border-[color:var(--foreground)] w-full p-5 opacity-50 hover:opacity-100 transition-all duration-200"
+            >
+              INSTAGRAM
+            </a>
+            <a
+              href="https://www.youtube.com/@gustavwickstroms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-t border-b border-[color:var(--foreground)] w-full p-5 opacity-50 hover:opacity-100 transition-all duration-200"
+            >
+              YOUTUBE
+            </a>
+          </div>
         </div>
       )}
     </>
