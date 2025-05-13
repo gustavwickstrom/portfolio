@@ -131,13 +131,13 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-background text-foreground z-50 flex flex-col lg:hidden text-base text-center">
+        <div className="fixed inset-0 bg-background text-foreground z-50 flex flex-col lg:hidden ">
           {/* Mobil-header i menyn */}
-          <div className="w-full px-6 pt-5 pb-6 grid grid-cols-2 text-white mix-blend-difference gap-8">
+          <div className="w-full px-4 pt-7 pb-6 grid grid-cols-2 text-white mix-blend-difference">
             <div className="flex flex-col">
               <Link
                 href="/"
-                className="text-big hover:opacity-50 transition-opacity duration-200"
+                className="text-big hover:opacity-50 transition-opacity duration-200 text-left"
               >
                 GUSTAV WICKSTRÖM
               </Link>
@@ -160,7 +160,7 @@ export default function Header() {
           </div>
 
           {/* Menylänkar med borders och margin */}
-          <div className="w-full flex flex-col px-4">
+          <div className="w-full flex flex-col px-4 text-base text-center">
             <Link
               href="/"
               onClick={() => handleNav("/")}
