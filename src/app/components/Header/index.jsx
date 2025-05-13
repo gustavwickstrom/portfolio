@@ -55,12 +55,12 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full pt-5 pb-6 grid grid-cols-2 lg:grid-cols-4 text-white mix-blend-difference gap-8 mb-4">
+      <header className="w-full pt-5 pb-6 grid grid-cols-2 lg:grid-cols-4 text-white mix-blend-difference gap-8 mb-1">
         {/* Column 1: Namn */}
         <div className="flex flex-col">
           <Link
             href="/"
-            className="text-big hover:opacity-50 transition-opacity duration-200"
+            className="w-fit text-big hover:opacity-50 transition-opacity duration-200"
           >
             GUSTAV WICKSTRÖM
           </Link>
@@ -68,17 +68,17 @@ export default function Header() {
 
         {/* Column 2: Navigation – hidden until lg */}
         <div className="flex flex-col hidden lg:flex">
-          <Link href="/" className={linkClass("/")}>
+          <Link href="/" className={`w-fit ${linkClass("/")}`}>
             IMAGERY
           </Link>
-          <Link href="/film" className={linkClass("/film")}>
+          <Link href="/film" className={`w-fit ${linkClass("/film")}`}>
             FILMS
           </Link>
         </div>
 
         {/* Column 3: Info – hidden until lg */}
         <div className="hidden lg:block">
-          <Link href="/info" className={linkClass("/info")}>
+          <Link href="/info" className={`w-fit ${linkClass("/info")}`}>
             INFO
           </Link>
         </div>
@@ -131,9 +131,9 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-background text-foreground z-50 flex flex-col lg:hidden ">
+        <div className="fixed inset-0 bg-background text-foreground z-50 flex flex-col lg:hidden">
           {/* Mobil-header i menyn */}
-          <div className="w-full px-4 pt-7 pb-6 grid grid-cols-2 text-white mix-blend-difference">
+          <div className="w-full px-4 pt-7 pb-6 grid grid-cols-2 text-white mix-blend-difference mb-20">
             <div className="flex flex-col">
               <Link
                 href="/"
@@ -160,13 +160,11 @@ export default function Header() {
           </div>
 
           {/* Menylänkar med borders och margin */}
-          <div className="w-full flex flex-col px-4 text-base text-center">
+          <div className="w-full flex flex-col px-4 text-base text-left">
             <Link
               href="/"
               onClick={() => handleNav("/")}
-              className={`${linkClass(
-                "/"
-              )} border-t border-[color:var(--foreground)] w-full p-5`}
+              className={`${linkClass("/")} w-full p-5`}
             >
               IMAGERY
             </Link>
@@ -200,7 +198,7 @@ export default function Header() {
               href="https://www.youtube.com/@gustavwickstroms"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-t border-b border-[color:var(--foreground)] w-full p-5 opacity-50 hover:opacity-100 transition-all duration-200"
+              className="border-t w-full p-5 opacity-50 hover:opacity-100 transition-all duration-200"
             >
               YOUTUBE
             </a>
