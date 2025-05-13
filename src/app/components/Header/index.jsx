@@ -55,7 +55,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full pt-5 pb-6 grid grid-cols-2 lg:grid-cols-4 text-white mix-blend-difference gap-8 mb-1">
+      <header className="w-full pt-5 pb-6 grid grid-cols-2 lg:grid-cols-4 text-white mix-blend-difference lg:gap-8 mb-1">
         {/* Column 1: Namn */}
         <div className="flex flex-col">
           <Link
@@ -133,7 +133,7 @@ export default function Header() {
       {menuOpen && (
         <div className="fixed inset-0 bg-background text-foreground z-50 flex flex-col lg:hidden">
           {/* Mobil-header i menyn */}
-          <div className="w-full px-4 pt-7 pb-6 grid grid-cols-2 text-white mix-blend-difference mb-20">
+          <div className="w-full px-4 pt-7 pb-6 grid grid-cols-2 text-white mix-blend-difference mb-52">
             <div className="flex flex-col">
               <Link
                 href="/"
@@ -159,12 +159,14 @@ export default function Header() {
             </div>
           </div>
 
+
+
           {/* Menylänkar med borders och margin */}
-          <div className="w-full flex flex-col px-4 text-base text-left">
+          <div className="w-full flex flex-col text-xl text-center gap-y-4">
             <Link
               href="/"
               onClick={() => handleNav("/")}
-              className={`${linkClass("/")} w-full p-5`}
+              className={`${linkClass("/")}`}
             >
               IMAGERY
             </Link>
@@ -173,7 +175,7 @@ export default function Header() {
               onClick={() => handleNav("/film")}
               className={`${linkClass(
                 "/film"
-              )} border-t border-[color:var(--foreground)] w-full p-5`}
+              )}`}
             >
               FILMS
             </Link>
@@ -182,7 +184,7 @@ export default function Header() {
               onClick={() => handleNav("/info")}
               className={`${linkClass(
                 "/info"
-              )} border-t border-[color:var(--foreground)] w-full p-5`}
+              )}`}
             >
               INFO
             </Link>
@@ -190,7 +192,7 @@ export default function Header() {
               href="https://www.instagram.com/gustavwickstrom/"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-t border-[color:var(--foreground)] w-full p-5 opacity-50 hover:opacity-100 transition-all duration-200"
+              className="opacity-50 hover:opacity-100 transition-all duration-200 mt-8"
             >
               INSTAGRAM
             </a>
@@ -198,7 +200,7 @@ export default function Header() {
               href="https://www.youtube.com/@gustavwickstroms"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-t w-full p-5 opacity-50 hover:opacity-100 transition-all duration-200"
+              className="opacity-50 hover:opacity-100 transition-all duration-200"
             >
               YOUTUBE
             </a>
