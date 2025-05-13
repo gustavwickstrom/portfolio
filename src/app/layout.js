@@ -1,7 +1,8 @@
 import '../styles/globals.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor'; // ← Lägg till detta
+import CustomCursor from './components/CustomCursor';
+import Loader from './components/Loader';
 
 export const metadata = {
   title: 'Gustav Wickström',

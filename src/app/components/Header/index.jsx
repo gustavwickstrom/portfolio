@@ -1,88 +1,175 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-
-const links = [
-  { href: '/', label: 'INDEX' },
-  { href: '/info', label: 'INFO' },
-  { href: 'https://www.instagram.com/gustavwickstrom/', label: 'INSTA', external: true },
-  { href: 'https://www.youtube.com/@gustavwickstroms', label: 'YT', external: true },
-];
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
-  const handleNav = (href, external) => {
-    if (external) return;
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    if (saved === "dark" || (!saved && prefersDark)) {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const html = document.documentElement;
+    if (html.classList.contains("dark")) {
+      html.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setIsDark(false);
+    } else {
+      html.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setIsDark(true);
+    }
+  };
+
+  const handleNav = (href) => {
     setMenuOpen(false);
     setTimeout(() => router.push(href), 300);
   };
 
+  const linkClass = (href) =>
+    `transition-opacity duration-200 ${
+      pathname === href ? "opacity-100" : "opacity-50 hover:opacity-100"
+    }`;
+
   return (
     <>
-      {/* FIXED HEADER */}
-      <header className="fixed top-0 left-0 right-0 z-50 w-full flex justify-between px-12 py-8">
-        <Link href="/" className="text-base hover:opacity-30 transition-opacity duration-200">
-        GUSTAV WICKSTRÖM
-        </Link>
+      <header className="w-full pt-5 pb-6 grid grid-cols-2 lg:grid-cols-4 text-white mix-blend-difference gap-8 mb-4">
+        {/* Column 1: Namn */}
+        <div className="flex flex-col">
+          <Link
+            href="/"
+            className="text-big hover:opacity-50 transition-opacity duration-200"
+          >
+            GUSTAV WICKSTRÖM
+          </Link>
+        </div>
 
-        <nav className="hidden lg:flex flex-col text-right gap-6">
-          {links.map(({ href, label, external }) =>
-            external ? (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                {label}
-              </a>
-            ) : (
-              <Link key={label} href={href} className="hover:underline">
-                {label}
-              </Link>
-            )
-          )}
-        </nav>
+        {/* Column 2: Navigation – hidden until lg */}
+        <div className="flex flex-col hidden lg:flex">
+          <Link href="/" className={linkClass("/")}>
+           IMAGERY
+          </Link>
+          <Link href="/film" className={linkClass("/film")}>
+          FILMS
+          </Link>
+        </div>
 
-        <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden">
-          {menuOpen ? 'CLOSE' : 'MENU'}
-        </button>
-      </header>
+        {/* Column 3: Info – hidden until lg */}
+        <div className="hidden lg:block">
+          <Link href="/info" className={linkClass("/info")}>
+            INFO
+          </Link>
+        </div>
 
-      {/* SPACER to offset fixed header height */}
-      <div className="h-16" />
-
-      {/* MOBILE MENU */}
-      <div
-        className={`
-          fixed inset-0 bg-background text-foreground z-40 flex flex-col items-center justify-center gap-8 text-headline
-          transition-opacity duration-300
-          pointer-events-none
-          ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0'}
-        `}
-      >
-        {links.map(({ href, label, external }) =>
-          external ? (
+        {/* Column 4: Social + toggle – hidden until lg */}
+        <div className="flex justify-between hidden lg:flex">
+          <div className="flex flex-col">
             <a
-              key={label}
-              href={href}
+              href="https://www.instagram.com/gustavwickstrom/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:underline"
-              onClick={() => setMenuOpen(false)}
+              className="opacity-50 hover:opacity-100 transition-all duration-200"
             >
-              {label}
+              INSTAGRAM
             </a>
-          ) : (
-            <button
-              key={label}
-              onClick={() => handleNav(href, external)}
-              className="hover:underline"
+            <a
+              href="https://www.youtube.com/@gustavwickstroms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-50 hover:opacity-100 transition-all duration-200"
             >
-              {label}
-            </button>
-          )
-        )}
-      </div>
+              YOUTUBE
+            </a>
+          </div>
+          <span
+            onClick={toggleTheme}
+            className="opacity-50 hover:opacity-100 transition-opacity duration-200"
+          >
+            {isDark ? "○ ●" : "● ○"}
+          </span>
+        </div>
+
+        {/* Mobile: Menu + Toggle – only shown below lg */}
+        <div className="flex justify-end items-start gap-6 lg:hidden">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="opacity-50 hover:opacity-100 transition-all duration-200"
+          >
+            {menuOpen ? "CLOSE" : "MENU"}
+          </button>
+
+          <span
+            onClick={toggleTheme}
+            className="opacity-50 hover:opacity-100 transition-opacity duration-200"
+          >
+            {isDark ? "○ ●" : "● ○"}
+          </span>
+        </div>
+      </header>
+
+      {/* Mobile Menu Overlay */}
+      {menuOpen && (
+
+
+        <div className="fixed inset-0 bg-background text-foreground z-50 flex flex-col items-center justify-center text-base lg:hidden">
+          <Link
+            href="/"
+            onClick={() => handleNav("/")}
+            className={
+              'linkClass("/") border-t border-[color:var(--foreground)] w-full mx-4 p-5'
+            }
+          >
+            IMAGERY
+          </Link>
+          <Link
+            href="/film"
+            onClick={() => handleNav("/film")}
+            className={
+              'linkClass("/film") border-t border-[color:var(--foreground)] w-full p-5'
+            }
+          >
+            FILMS
+          </Link>
+          <Link
+            href="/info"
+            onClick={() => handleNav("/info")}
+            className={
+              'linkClass("/info") border-t border-[color:var(--foreground)] w-full p-5'
+            }
+          >
+            INFO
+          </Link>
+          <a
+            href="https://www.instagram.com/gustavwickstrom/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border-t border-[color:var(--foreground)] w-full p-5"
+          >
+            INSTAGRAM
+          </a>
+          <a
+            href="https://www.youtube.com/@gustavwickstroms"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border-b border-t border-[color:var(--foreground)] w-full p-5"
+          >
+            YOUTUBE
+          </a>
+        </div>
+      )}
     </>
   );
 }

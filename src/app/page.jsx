@@ -33,69 +33,47 @@ export default function Home() {
   const openLightbox = (index) => setSelectedIndex(index);
   const closeLightbox = () => setSelectedIndex(null);
 
-  const mediaClasses = ` w-fulll h-full object-cover`;
-
-  const getOrientationClass = (orientation) =>
-    orientation === "portrait" ? "aspect-[3/4]" : "aspect-[3/2]";
+  const mediaClasses = `h-full object-cover`;
 
   return (
     <PageWrapper>
-      {/* <section className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-7 gap-20 px-4 py-20 max-w-[2000px] mx-auto mt-20">
-        {catalogue.map(({ src, title, label, type = 'image', orientation = 'landscape' }, index) => (
-      </section> */}
-
-      <section
-        className="grid 
-                          grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 
-                          gap-x-4 lg:gap-x-20 
-                          lg:gap-y-4 
-                          mt-10 lg:mt-32
-                          xl:mx-20
-                          mb-20
-                          "
-                          
-      >
-        {catalogue.map(
-          (
-            { src, title, label, type = "image", orientation = "landscape" },
-            index
-          ) => (
+      <section className="columns-2 md:columns-3 lg:columns-4 gap-x-4 lg:gap-x-8 pb-10">
+        {catalogue.map(({ src, title, label, type = "image" }, index) => (
+          <div
+            key={index}
+            ref={(el) => (imageRefs.current[index] = el)}
+            data-index={index}
+            className={`mb-5 lg:mb-8 break-inside-avoid transform transition-all duration-700 ease-out
+  ${
+    visibleIndexes.includes(index)
+      ? "opacity-100 translate-y-0"
+      : "opacity-0 translate-y-20"
+  }
+`}
+          >
             <div
-              key={index}
-              ref={(el) => (imageRefs.current[index] = el)}
-              data-index={index}
-              className={`flex items-center justify-center transition-opacity duration-700 ease-out col-span-1 overflow-hidden aspect-[1/1] ${
-                visibleIndexes.includes(index) ? "opacity-100" : "opacity-0"
-              }`}
+              onClick={() => openLightbox(index)}
+              className="w-full overflow-hidden relative"
             >
-              <div
-                onClick={() => openLightbox(index)}
-                className={`h-[70%] p-1 flex justify-center items-center hover:opacity-80 transition-opacity w-full `}
-              >
-                {type === "video" ? (
-                  <video
-                    src={src}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className={`${mediaClasses} ${getOrientationClass(
-                      orientation
-                    )}`}
-                  />
-                ) : (
-                  <img
-                    src={src}
-                    alt={label}
-                    className={`${mediaClasses} ${getOrientationClass(
-                      orientation
-                    )}`}
-                  />
-                )}
-              </div>
+              {type === "video" ? (
+                <video
+                  src={src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-auto transition-transform duration-300 hover:scale-110"
+                />
+              ) : (
+                <img
+                  src={src}
+                  alt={label}
+                  className="w-full h-auto transition-transform duration-300 hover:scale-110"
+                />
+              )}
             </div>
-          )
-        )}
+          </div>
+        ))}
       </section>
 
       {selectedIndex !== null && (

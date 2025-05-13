@@ -13,8 +13,9 @@ export default {
         foreground: "var(--foreground)",
       },
       fontSize: {
-        headline: ['34px', { lineHeight: '1.2', fontWeight: '400' }],
-        base: ['13px', { lineHeight: '1.6', fontWeight: '400' }],
+        headline: ['36px', { lineHeight: '1.2', fontWeight: '400' }],
+        big: ['18px', { lineHeight: '1.6', fontWeight: '400' }],
+        base: ['11px', { lineHeight: '1.6', fontWeight: '400' }],
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
