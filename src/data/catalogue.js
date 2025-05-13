@@ -10,11 +10,6 @@ const catalogue = [
     label: "DSC02129.jpg",
   },
   {
-    src: "/images/frame1.webp",
-    title: "Frame 1",
-    label: "frame1.jpg",
-  },
-  {
     src: "/images/hirez-nystudio-logo-interpretation.webp",
     title: "hirez-nystudio-logo-interpretation",
     label: "hirez-nystudio-logo-interpretation.jpg",
@@ -30,19 +25,9 @@ const catalogue = [
     label: "DSC01749.webp",
   },
   {
-    src: "/images/frame3.webp",
-    title: "Frame 3",
-    label: "frame3.jpg",
-  },
-  {
     src: "/images/R1-01705-0010.webp",
     title: "R1-01705-0010",
     label: "R1-01705-0010.jpg",
-  },
-   {
-    src: "/images/DSC01705.webp",
-    title: "DSC01705",
-    label: "DSC01705.webp",
   },
   {
     src: "/images/DSC05543.webp",
