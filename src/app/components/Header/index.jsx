@@ -133,7 +133,7 @@ export default function Header() {
       {menuOpen && (
         <div className="fixed inset-0 bg-background text-foreground z-50 flex flex-col lg:hidden">
           {/* Mobil-header i menyn */}
-          <div className="w-full px-4 pt-7 pb-6 grid grid-cols-2 text-white mix-blend-difference mb-52">
+          <div className="w-full px-4 pt-7 pb-6 grid grid-cols-2 text-white mix-blend-difference">
             <div className="flex flex-col">
               <Link
                 href="/"
@@ -159,51 +159,49 @@ export default function Header() {
             </div>
           </div>
 
-
-
           {/* Menylänkar med borders och margin */}
-          <div className="w-full flex flex-col text-xl text-center gap-y-4">
-            <Link
-              href="/"
-              onClick={() => handleNav("/")}
-              className={`${linkClass("/")}`}
-            >
-              IMAGERY
-            </Link>
-            <Link
-              href="/film"
-              onClick={() => handleNav("/film")}
-              className={`${linkClass(
-                "/film"
-              )}`}
-            >
-              FILMS
-            </Link>
-            <Link
-              href="/info"
-              onClick={() => handleNav("/info")}
-              className={`${linkClass(
-                "/info"
-              )}`}
-            >
-              INFO
-            </Link>
-            <a
-              href="https://www.instagram.com/gustavwickstrom/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-100 transition-all duration-200 mt-8"
-            >
-              INSTAGRAM
-            </a>
-            <a
-              href="https://www.youtube.com/@gustavwickstroms"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="opacity-50 hover:opacity-100 transition-all duration-200"
-            >
-              YOUTUBE
-            </a>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-xl text-center gap-y-10">
+            <div className="flex flex-col gap-y-3">
+              <Link
+                href="/"
+                onClick={() => handleNav("/")}
+                className={`${linkClass("/")}`}
+              >
+                IMAGERY
+              </Link>
+              <Link
+                href="/film"
+                onClick={() => handleNav("/film")}
+                className={`${linkClass("/film")}`}
+              >
+                FILMS
+              </Link>
+              <Link
+                href="/info"
+                onClick={() => handleNav("/info")}
+                className={`${linkClass("/info")}`}
+              >
+                INFO
+              </Link>
+            </div>
+            <div className="flex flex-col gap-y-3">
+              <a
+                href="https://www.instagram.com/gustavwickstrom/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-50 hover:opacity-100 transition-all duration-200"
+              >
+                INSTAGRAM
+              </a>
+              <a
+                href="https://www.youtube.com/@gustavwickstroms"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-50 hover:opacity-100 transition-all duration-200"
+              >
+                YOUTUBE
+              </a>
+            </div>
           </div>
         </div>
       )}
