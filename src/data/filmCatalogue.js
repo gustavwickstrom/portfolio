@@ -1,40 +1,20 @@
 const filmCatalogue = [
   {
-    title: "Blue",
-    slug: "v1",
-    client: "Nike",
-    thumbnail: "/thumbnails/v1.jpg",
+    title: "Gravity Reversed",
+    slug: "gravity-reversed",
+    client: "Personal Project",
+    videoUrl: "/film/gravityreversed/gravity-reversed.mp4",
+    thumbnail: "/film/gravityreversed/gravity-reversed-thumbnail.jpg",
+    stills: [
+      "/film/gravityreversed/still-1.jpg",
+      "/film/gravityreversed/still-2.jpg",
+      "/film/gravityreversed/still-3.jpg",
+      "/film/gravityreversed/still-4.jpg",
+      "/film/gravityreversed/still-5.jpg",
+      "/film/gravityreversed/still-6.jpg",
+    ],
   },
-  {
-    title: "v2",
-    slug: "v2",
-    client: "Nike",
-    thumbnail: "/thumbnails/v2.jpg",
-  },
-  {
-    title: "v3",
-    slug: "v3",
-    client: "Nike",
-    thumbnail: "/thumbnails/v1.jpg",
-  },
-  {
-    title: "v4",
-    slug: "v4",
-    client: "Nike",
-    thumbnail: "/thumbnails/v2.jpg",
-  },
-  {
-    title: "v5",
-    slug: "v5",
-    client: "Nike",
-    thumbnail: "/thumbnails/v2.jpg",
-  },
-  {
-    title: "v6",
-    slug: "v6",
-    client: "Nike",
-    thumbnail: "/thumbnails/v1.jpg",
-  },
+  
 ];
 
 export default filmCatalogue;

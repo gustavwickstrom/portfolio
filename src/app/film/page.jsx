@@ -53,10 +53,10 @@ export default function Film() {
                 alt={title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white text-center">
+              <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white text-center">
                 <span className="text-lg">{title}</span>
                 {client && (
-                  <span className="text-sm mt-1 opacity-80">{client}</span>
+                  <span className="text-sm opacity-80">{client}</span>
                 )}
               </div>
             </div>
