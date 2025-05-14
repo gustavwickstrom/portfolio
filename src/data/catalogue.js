@@ -29,17 +29,16 @@ const catalogue = [
     title: "R1-01705-0010",
     label: "R1-01705-0010.jpg",
   },
+   {
+    src: "/images/DSC01705.webp",
+    title: "DSC01705",
+    label: "DSC01705.webp",
+  },
   {
     src: "/images/DSC05543.webp",
     title: "DSC05543",
     label: "DSC05543.jpg",
-  },
-  {
-    src: "/images/frame2.webp",
-    title: "Frame 2",
-    label: "frame2.jpg",
-  },
-  
+  },  
 ];
 
 export default catalogue;
