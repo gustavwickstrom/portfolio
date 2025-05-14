@@ -62,9 +62,9 @@ export default function FilmDetail(props) {
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
         }`}
       >
-        <div>
+        <div className="flex flex-col gap-y-2">
           <h1 className="text-headline font-bold text-left">{film.title}</h1>
-          <h2 className="text-big text-left">{film.client}</h2>
+          <h2 className="text-big text-left opacity-50r">{film.client}</h2>
         </div>
 
         <video

@@ -3,18 +3,46 @@ const filmCatalogue = [
     title: "Gravity Reversed",
     slug: "gravity-reversed",
     client: "Personal Project",
-    videoUrl: "/film/gravityreversed/gravity-reversed.mp4",
-    thumbnail: "/film/gravityreversed/gravity-reversed-thumbnail.jpg",
+    videoUrl: "/film/gravity-reversed/gravity-reversed.mp4",
+    thumbnail: "/film/gravity-reversed/gravity-reversed-thumbnail.jpg",
     stills: [
-      "/film/gravityreversed/still-1.jpg",
-      "/film/gravityreversed/still-2.jpg",
-      "/film/gravityreversed/still-3.jpg",
-      "/film/gravityreversed/still-4.jpg",
-      "/film/gravityreversed/still-5.jpg",
-      "/film/gravityreversed/still-6.jpg",
+      "/film/gravity-reversed/still-1.jpg",
+      "/film/gravity-reversed/still-2.jpg",
+      "/film/gravity-reversed/still-3.jpg",
+      "/film/gravity-reversed/still-4.jpg",
+      "/film/gravity-reversed/still-5.jpg",
+      "/film/gravity-reversed/still-6.jpg",
     ],
   },
   
+  {
+    title: "Cornelia Solsjö",
+    slug: "cornelia-solsjo",
+    client: "Personal Project",
+    videoUrl: "/film/cornelia-solsjo/cornelia-solsjo.mp4",
+    thumbnail: "/film/cornelia-solsjo/cornelia-solsjo-thumbnail.jpg",
+    stills: [
+      "/film/cornelia-solsjo/still-1.jpg",
+      "/film/cornelia-solsjo/still-2.jpg",
+    ],
+  },
+
+  {
+    title: "Oliver",
+    slug: "oliver",
+    client: "Personal Project",
+    videoUrl: "/film/oliver/oliver.mp4",
+    thumbnail: "/film/oliver/oliver-thumbnail.jpg",
+    stills: [
+      "/film/oliver/still-1.jpg",
+      "/film/oliver/still-2.jpg",
+      "/film/oliver/still-3.jpg",
+      "/film/oliver/still-4.jpg",
+      "/film/oliver/still-5.jpg",
+      "/film/oliver/still-6.jpg",
+      "/film/oliver/still-7.jpg",
+    ],
+  },
 ];
 
 export default filmCatalogue;
