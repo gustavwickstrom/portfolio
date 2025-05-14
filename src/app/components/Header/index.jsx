@@ -72,7 +72,7 @@ export default function Header() {
             IMAGERY
           </Link>
           <Link href="/film" className={`w-fit ${linkClass("/film")}`}>
-            FILMS
+            FILM
           </Link>
         </div>
 
@@ -160,7 +160,7 @@ export default function Header() {
           </div>
 
           {/* Menylänkar med borders och margin */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-xl text-center gap-y-12">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-xl text-center gap-y-12g">
             <div className="flex flex-col gap-y-3">
               <Link
                 href="/"
@@ -174,7 +174,7 @@ export default function Header() {
                 onClick={() => handleNav("/film")}
                 className={`${linkClass("/film")}`}
               >
-                FILMS
+                FILM
               </Link>
               <Link
                 href="/info"

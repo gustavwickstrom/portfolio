@@ -1,33 +1,39 @@
 const filmCatalogue = [
   {
-    title: "v1",
+    title: "Blue",
+    slug: "v1",
+    client: "Nike",
     thumbnail: "/thumbnails/v1.jpg",
-    videoUrl: "/videos/v1.mp4",
   },
   {
     title: "v2",
+    slug: "v2",
+    client: "Nike",
     thumbnail: "/thumbnails/v2.jpg",
-    videoUrl: "/videos/v2.mp4",
   },
   {
-    title: "v1",
+    title: "v3",
+    slug: "v3",
+    client: "Nike",
     thumbnail: "/thumbnails/v1.jpg",
-    videoUrl: "/videos/v3.mp4",
   },
   {
-    title: "v2",
+    title: "v4",
+    slug: "v4",
+    client: "Nike",
     thumbnail: "/thumbnails/v2.jpg",
-    videoUrl: "/videos/v4.mp4",
   },
   {
-    title: "v1",
+    title: "v5",
+    slug: "v5",
+    client: "Nike",
     thumbnail: "/thumbnails/v2.jpg",
-    videoUrl: "/videos/v1.mp4",
   },
   {
-    title: "v1",
+    title: "v6",
+    slug: "v6",
+    client: "Nike",
     thumbnail: "/thumbnails/v1.jpg",
-    videoUrl: "/videos/v1.mp4",
   },
 ];
 
