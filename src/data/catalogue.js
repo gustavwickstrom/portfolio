@@ -57,7 +57,7 @@ const catalogue = [
   },
   {
     src: "/images/DSC05543.webp",
-    title: "DSC05543",
+    title: "Sid",
     agency: "",
     client: "",
     role: "",

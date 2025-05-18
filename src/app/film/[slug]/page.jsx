@@ -60,7 +60,7 @@ export default function FilmDetail(props) {
         }`}
       >
         <div className="flex flex-col gap-y-2 mt-10 text-left">
-          <h1 className="text-9xl font-bold mb-8">{film.title}</h1>
+          <h1 className="text-6xl lg:text-9xl font-bold mb-8">{film.title}</h1>
         </div>
 
         <video
@@ -78,7 +78,7 @@ export default function FilmDetail(props) {
         <div className="w-full text-base grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-8 my-10">
           <div>
             <p className="opacity-50">AGENCY</p>
-            <p>{film.agency || "Solo work"}</p>
+            <p>{film.agency || "None"}</p>
           </div>
           <div>
             <p className="opacity-50">CLIENT</p>

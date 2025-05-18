@@ -4,8 +4,8 @@ const filmCatalogue = [
     slug: "andreas-wahlberg",
     agency: "",
     client: "",
-    role: "",
-    year: "",
+    role: "Director of photography",
+    year: "2025",
     videoUrl: "/film/gravity-reversed/gravity-reversed.mp4",
     thumbnail: "/film/gravity-reversed/gravity-reversed-thumbnail.jpg",
     stills: [
@@ -23,8 +23,8 @@ const filmCatalogue = [
     slug: "cornelia-solsjo",
     agency: "",
     client: "",
-    role: "",
-    year: "",
+    role: "DOP | Colorist | Editor",
+    year: "2025",
     videoUrl: "/film/cornelia-solsjo/cornelia-solsjo.mp4",
     thumbnail: "/film/cornelia-solsjo/cornelia-solsjo-thumbnail.jpg",
     stills: [

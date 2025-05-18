@@ -120,11 +120,11 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
       <div className="w-full px-4 sm:px-6 lg:px-8 pb-8 gap-8 text-base grid grid-cols-2 md:grid-cols-4 gap-y-4">
         <div>
           <p className="opacity-50">TITLE</p>
-          <p>{media.title}</p>
+          <p>{media.title || "Untitled"}</p>
         </div>
         <div>
           <p className="opacity-50">AGENCY</p>
-          <p>{media.agency || "Solo work"}</p>
+          <p>{media.agency || "None"}</p>
         </div>
         <div>
           <p className="opacity-50">CLIENT</p>
