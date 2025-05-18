@@ -1,8 +1,11 @@
 const filmCatalogue = [
   {
-    title: "Gravity Reversed",
-    slug: "gravity-reversed",
-    client: "Personal Project",
+    title: "Andreas Wahlberg",
+    slug: "andreas-wahlberg",
+    agency: "",
+    client: "",
+    role: "",
+    year: "",
     videoUrl: "/film/gravity-reversed/gravity-reversed.mp4",
     thumbnail: "/film/gravity-reversed/gravity-reversed-thumbnail.jpg",
     stills: [
@@ -18,7 +21,10 @@ const filmCatalogue = [
   {
     title: "Cornelia Solsjö",
     slug: "cornelia-solsjo",
-    client: "Personal Project",
+    agency: "",
+    client: "",
+    role: "",
+    year: "",
     videoUrl: "/film/cornelia-solsjo/cornelia-solsjo.mp4",
     thumbnail: "/film/cornelia-solsjo/cornelia-solsjo-thumbnail.jpg",
     stills: [
@@ -28,9 +34,12 @@ const filmCatalogue = [
   },
 
   {
-    title: "Oliver",
-    slug: "oliver",
-    client: "Personal Project",
+    title: "Oliver Blazevic",
+    slug: "oliver-blazevic",
+    agency: "",
+    client: "",
+    role: "",
+    year: "",
     videoUrl: "/film/oliver/oliver.mp4",
     thumbnail: "/film/oliver/oliver-thumbnail.jpg",
     stills: [
