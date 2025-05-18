@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -8,6 +8,10 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const media = images[currentIndex];
 
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
+  // KEYBOARD EVENTS
   useEffect(() => {
     const handleKey = (e) => {
       const key = e.key.toLowerCase();
@@ -27,10 +31,32 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
     };
   }, [currentIndex, images.length, onClose]);
 
+  // TOUCH EVENTS
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].screenX;
+    const deltaX = touchEndX.current - touchStartX.current;
+
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX > 0) {
+        // swipe right → previous
+        setCurrentIndex((currentIndex - 1 + images.length) % images.length);
+      } else {
+        // swipe left → next
+        setCurrentIndex((currentIndex + 1) % images.length);
+      }
+    }
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 bg-background text-foreground flex flex-col justify-between"
       onClick={onClose}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Header */}
       <header className="w-full pt-7 px-4 lg:pt-7 lg:px-8 text-big flex items-center justify-between">
@@ -45,7 +71,6 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
           GUSTAV WICKSTRÖM
         </Link>
 
-        {/* Close-knapp med olika innehåll beroende på storlek */}
         <button
           onClick={(e) => {
             e.stopPropagation();
