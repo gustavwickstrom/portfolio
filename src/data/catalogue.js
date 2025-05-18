@@ -1,43 +1,67 @@
 const catalogue = [
  {
     src: "/images/DSC02063.webp",
-    title: "DSC02063",
-    label: "DSC02063.jpg",
+    title: "Blue",
+    agency: "",
+    client: "",
+    role: "Photographer",
+    year: "2025",
   },
   {
     src: "/images/DSC02129.webp",
-    title: "DSC02129",
-    label: "DSC02129.jpg",
+    title: "Oliver",
+    agency: "",
+    client: "",
+    role: "Photographer",
+    year: "2025",
   },
   {
     src: "/images/hirez-nystudio-logo-interpretation.webp",
-    title: "hirez-nystudio-logo-interpretation",
-    label: "hirez-nystudio-logo-interpretation.jpg",
+    title: "Ny Studio | Logo interpretation",
+    agency: "Team project with David Ljung",
+    client: "",
+    role: "Photographer & Art Director",
+    year: "2022",
   },
   {
     src: "/images/martinH.webp",
-    title: "Martin Herma",
-    label: "martinH.jpg",
+    title: "Martin Herma | Behind the scenes",
+    agency: "",
+    client: "",
+    role: "Photographer",
+    year: "2022",
   },
   {
     src: "/images/DSC01749.webp",
     title: "DSC01749",
-    label: "DSC01749.webp",
+    agency: "",
+    client: "",
+    role: "Photographer",
+    year: "2025"
   },
   {
     src: "/images/R1-01705-0010.webp",
-    title: "R1-01705-0010",
-    label: "R1-01705-0010.jpg",
+    title: "Analogue morning",
+    agency: "",
+    client: "",
+    role: "Photographer",
+    year: "2024"
   },
    {
     src: "/images/DSC01705.webp",
-    title: "DSC01705",
-    label: "DSC01705.webp",
+    title: "Cherry",
+    agency: "",
+    client: "",
+    role: "",
+    year: "2025"
   },
   {
     src: "/images/DSC05543.webp",
     title: "DSC05543",
-    label: "DSC05543.jpg",
+    agency: "",
+    client: "",
+    role: "",
+    year: ""
   },  
 ];
 

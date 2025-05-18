@@ -1,119 +1,105 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function LightboxOverlay({ images, initialIndex, onClose }) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
-  const [isFadingOut, setIsFadingOut] = useState(false);
-
-  const videoRef = useRef(null);
   const media = images[currentIndex];
 
   useEffect(() => {
-    const timeout = setTimeout(() => setIsVisible(true), 10);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
     const handleKey = (e) => {
-      if (e.key === "Escape") closeWithAnimation();
+      const key = e.key.toLowerCase();
+      if (key === "escape" || key === "x") onClose();
       else if (e.key === "ArrowRight")
-        fadeToIndex((currentIndex + 1) % images.length);
+        setCurrentIndex((currentIndex + 1) % images.length);
       else if (e.key === "ArrowLeft")
-        fadeToIndex((currentIndex - 1 + images.length) % images.length);
+        setCurrentIndex((currentIndex - 1 + images.length) % images.length);
     };
 
     window.addEventListener("keydown", handleKey);
     document.body.classList.add("overflow-hidden");
+
     return () => {
       window.removeEventListener("keydown", handleKey);
       document.body.classList.remove("overflow-hidden");
     };
-  }, [currentIndex, images.length]);
-
-  const fadeToIndex = (newIndex) => {
-    setIsFadingOut(true);
-    setTimeout(() => {
-      setCurrentIndex(newIndex);
-      setIsFadingOut(false);
-    }, 300);
-  };
-
-  const closeWithAnimation = () => {
-    setIsClosing(true);
-    setTimeout(() => onClose(), 300);
-  };
+  }, [currentIndex, images.length, onClose]);
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-background text-foreground"
-      onClick={closeWithAnimation}
+      className="fixed inset-0 z-50 bg-background text-foreground flex flex-col justify-between"
+      onClick={onClose}
     >
-      <div
-        className={`absolute inset-0 transition-opacity duration-300 ${
-          isVisible && !isClosing ? "opacity-100" : "opacity-0"
-        }`}
-      />
+      {/* Header */}
+      <header className="w-full pt-7 px-4 lg:pt-7 lg:px-8 text-big flex items-center justify-between">
+        <Link
+          href="/"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
+          className="hover:opacity-50 transition-opacity duration-200"
+        >
+          GUSTAV WICKSTRÖM
+        </Link>
 
-      <div
-        className={`relative z-10 flex flex-col md:flex-row h-full w-full transition-all duration-300 ease-out ${
-          isVisible && !isClosing
-            ? "opacity-100 scale-100"
-            : "opacity-0 scale-95"
-        }`}
+        {/* Close-knapp med olika innehåll beroende på storlek */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
+          aria-label="Close lightbox"
+          className="text-foreground text-base hover:opacity-50 transition-opacity duration-200"
+        >
+          <span className="lg:hidden">CLOSE</span>
+          <span className="hidden lg:inline">[ X ] CLOSE</span>
+        </button>
+      </header>
+
+      {/* Bild */}
+      <main
+        className="flex items-center justify-center px-4"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Left: Media */}
-        <div className="w-full flex items-center justify-center p-6">
-          {media.type === "video" ? (
-            <video
-              key={currentIndex}
-              ref={(el) => (videoRef.current = el)}
-              src={media.src}
-              controls
-              playsInline
-              controlsList="nodownload nofullscreen noremoteplayback"
-              className={`max-h-[90vh] w-auto h-auto object-contain transition-opacity duration-300 ${
-                isFadingOut ? "opacity-0" : "opacity-100"
-              }`}
-              onClick={(e) => {
-                e.stopPropagation();
-                const video = videoRef.current;
-                video.paused ? video.play() : video.pause();
-              }}
-            />
-          ) : (
-            <Image
-              key={currentIndex}
-              src={media.src}
-              alt={media.label}
-              width={1600}
-              height={1200}
-              className={`max-h-[90vh] w-auto h-auto object-contain transition-opacity duration-300 ${
-                isFadingOut ? "opacity-0" : "opacity-100"
-              }`}
-            />
-          )}
+        <div className="flex items-center justify-center h-[50vh] md:h-[75vh] w-full md:w-auto">
+          <Image
+            key={currentIndex}
+            src={media.src}
+            alt={media.title}
+            width={1600}
+            height={1200}
+            className="object-contain h-full w-full md:w-auto"
+          />
         </div>
+      </main>
 
-        {/* Navigation buttons (absolute on sides) */}
-        <button
-          onClick={() =>
-            fadeToIndex((currentIndex - 1 + images.length) % images.length)
-          }
-          className="absolute left-36 top-1/2 -translate-y-1/2 text-sm hover:underline z-20"
-        >
-          ← Previous
-        </button>
-        <button
-          onClick={() => fadeToIndex((currentIndex + 1) % images.length)}
-          className="absolute right-36 top-1/2 -translate-y-1/2 text-sm hover:underline z-20"
-        >
-          Next →
-        </button>
+      {/* Info */}
+      <div className="w-full px-4 sm:px-6 lg:px-8 pb-8 gap-8 text-base grid grid-cols-2 md:grid-cols-4 gap-y-4">
+        <div>
+          <p className="opacity-50">TITLE</p>
+          <p>{media.title}</p>
+        </div>
+        <div>
+          <p className="opacity-50">AGENCY</p>
+          <p>{media.agency || "Solo work"}</p>
+        </div>
+        <div>
+          <p className="opacity-50">CLIENT</p>
+          <p>{media.client || "Personal project"}</p>
+        </div>
+        <div className="flex justify-between">
+          <div>
+            <p className="opacity-50">ROLE</p>
+            <p>{media.role || "Not specified"}</p>
+          </div>
+          <div className="text-right">
+            <p className="opacity-50">YEAR</p>
+            <p>{media.year || "x"}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

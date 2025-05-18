@@ -31,7 +31,7 @@ export default function Film() {
 
   return (
     <PageWrapper>
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-12">
+      <section className="grid grid-cols-1 lg:grid-cols-4 gap-8 pb-12">
         {filmCatalogue.map(({ title, client, thumbnail, slug }, index) => (
           <Link
             key={slug || `${title}-${index}`}
