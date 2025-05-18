@@ -6,32 +6,35 @@ import Link from "next/link";
 
 export default function LightboxOverlay({ images, initialIndex, onClose }) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [imageVisible, setImageVisible] = useState(false);
+  const [closing, setClosing] = useState(false);
   const media = images[currentIndex];
 
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
 
-  // KEYBOARD EVENTS
+  // Keyboard
   useEffect(() => {
     const handleKey = (e) => {
       const key = e.key.toLowerCase();
-      if (key === "escape" || key === "x") onClose();
+      if (key === "escape" || key === "x") triggerClose();
       else if (e.key === "ArrowRight")
-        setCurrentIndex((currentIndex + 1) % images.length);
+        setCurrentIndex((prev) => (prev + 1) % images.length);
       else if (e.key === "ArrowLeft")
-        setCurrentIndex((currentIndex - 1 + images.length) % images.length);
+        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
     };
 
     window.addEventListener("keydown", handleKey);
     document.body.classList.add("overflow-hidden");
+    setImageVisible(true); // trigger fade-in
 
     return () => {
       window.removeEventListener("keydown", handleKey);
       document.body.classList.remove("overflow-hidden");
     };
-  }, [currentIndex, images.length, onClose]);
+  }, [images.length]);
 
-  // TOUCH EVENTS
+  // Swipe
   const handleTouchStart = (e) => {
     touchStartX.current = e.changedTouches[0].screenX;
   };
@@ -42,19 +45,25 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
 
     if (Math.abs(deltaX) > 50) {
       if (deltaX > 0) {
-        // swipe right → previous
-        setCurrentIndex((currentIndex - 1 + images.length) % images.length);
+        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
       } else {
-        // swipe left → next
-        setCurrentIndex((currentIndex + 1) % images.length);
+        setCurrentIndex((prev) => (prev + 1) % images.length);
       }
     }
+  };
+
+  const triggerClose = () => {
+    setImageVisible(false);
+    setClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 300); // matchar transition
   };
 
   return (
     <div
       className="fixed inset-0 z-50 bg-background text-foreground flex flex-col justify-between"
-      onClick={onClose}
+      onClick={triggerClose}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -64,7 +73,7 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
           href="/"
           onClick={(e) => {
             e.stopPropagation();
-            onClose();
+            triggerClose();
           }}
           className="hover:opacity-50 transition-opacity duration-200"
         >
@@ -74,7 +83,7 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            onClose();
+            triggerClose();
           }}
           aria-label="Close lightbox"
           className="text-foreground text-base hover:opacity-50 transition-opacity duration-200"
@@ -86,10 +95,16 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
 
       {/* Bild */}
       <main
-        className="flex items-center justify-center px-4"
+        className="flex items-center justify-center px-4 flex-grow"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-center h-[50vh] md:h-[75vh] w-full md:w-auto">
+        <div
+          className={`transition-all duration-500 ease-out transform ${
+            imageVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
+          } flex items-center justify-center h-[50vh] md:h-[75vh] w-full md:w-auto`}
+        >
           <Image
             key={currentIndex}
             src={media.src}
@@ -101,7 +116,7 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
         </div>
       </main>
 
-      {/* Info */}
+      {/* Footer */}
       <div className="w-full px-4 sm:px-6 lg:px-8 pb-8 gap-8 text-base grid grid-cols-2 md:grid-cols-4 gap-y-4">
         <div>
           <p className="opacity-50">TITLE</p>
