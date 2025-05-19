@@ -78,19 +78,19 @@ export default function FilmDetail(props) {
         <div className="w-full text-base grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-8 my-10">
           <div>
             <p className="opacity-50">AGENCY</p>
-            <p>{film.agency || "None"}</p>
+            <p>{film.agency || "NONE"}</p>
           </div>
           <div>
             <p className="opacity-50">CLIENT</p>
-            <p>{film.client || "Personal project"}</p>
+            <p>{film.client || "PERSONAL PROJECT"}</p>
           </div>
           <div>
             <p className="opacity-50">ROLE</p>
-            <p>{film.role || "Not specified"}</p>
+            <p>{film.role || "NOT SPECIFIED"}</p>
           </div>
           <div className="">
             <p className="opacity-50">YEAR</p>
-            <p>{film.year || "Not specified"}</p>
+            <p>{film.year || "NOT SPECIFIED"}</p>
           </div>
         </div>
 
