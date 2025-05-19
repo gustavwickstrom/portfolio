@@ -1,6 +1,6 @@
 const filmCatalogue = [
   {
-    title: "Filip Wickström",
+    title: "FILIP WICKSTRÖM",
     slug: "filip-wickstrom",
     agency: "",
     client: "",
@@ -22,11 +22,11 @@ const filmCatalogue = [
     ],
   },
   {
-    title: "Andreas Wahlberg",
+    title: "ANDREAS WAHLBERG",
     slug: "andreas-wahlberg",
     agency: "",
     client: "",
-    role: "DOP | Colorist | Editor",
+    role: "DOP | COLORIST | EDITOR",
     year: "2025",
     videoUrl: "/film/gravity-reversed/gravity-reversed.mp4",
     thumbnail: "/film/gravity-reversed/gravity-reversed-thumbnail.jpg",
@@ -41,11 +41,11 @@ const filmCatalogue = [
   },
   
   {
-    title: "Cornelia Solsjö",
+    title: "CORNELIA SOLSJÖ",
     slug: "cornelia-solsjo",
     agency: "",
     client: "",
-    role: "DOP | Colorist | Editor",
+    role: "DOP | COLORIST | EDITOR",
     year: "2025",
     videoUrl: "/film/cornelia-solsjo/cornelia-solsjo.mp4",
     thumbnail: "/film/cornelia-solsjo/cornelia-solsjo-thumbnail.jpg",
@@ -56,11 +56,11 @@ const filmCatalogue = [
   },
 
   {
-    title: "Oliver Blazevic",
+    title: "OLIVER BLAZEVIC",
     slug: "oliver-blazevic",
     agency: "",
     client: "",
-    role: "DOP | Colorist | Editor",
+    role: "DOP | COLORIST | EDITOR",
     year: "",
     videoUrl: "/film/oliver/oliver.mp4",
     thumbnail: "/film/oliver/oliver-thumbnail.jpg",

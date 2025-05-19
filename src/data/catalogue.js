@@ -1,18 +1,18 @@
 const catalogue = [
  {
     src: "/images/DSC02063.webp",
-    title: "Blue",
+    title: "BLUE",
     agency: "",
     client: "",
-    role: "Photographer",
+    role: "PHOTOGRAPHER",
     year: "2025",
   },
   {
     src: "/images/DSC02129.webp",
-    title: "Oliver",
+    title: "OLIVER",
     agency: "",
     client: "",
-    role: "Photographer",
+    role: "PHOTOGRAPHER",
     year: "2025",
   },
   {
@@ -20,7 +20,7 @@ const catalogue = [
     title: "Ny Studio | Logo interpretation",
     agency: "Team project with David Ljung",
     client: "",
-    role: "Photographer & Art Director",
+    role: "PHOTOGRAPHER & ART DIRECTOR",
     year: "2022",
   },
   {
