@@ -117,29 +117,26 @@ export default function LightboxOverlay({ images, initialIndex, onClose }) {
       </main>
 
       {/* Footer */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 pb-8 gap-8 text-base grid grid-cols-2 md:grid-cols-4 gap-y-4">
-        <div>
-          <p className="opacity-50">TITLE</p>
-          <p>{media.title || "Untitled"}</p>
-        </div>
-        <div>
-          <p className="opacity-50">AGENCY</p>
-          <p>{media.agency || "None"}</p>
-        </div>
-        <div>
-          <p className="opacity-50">CLIENT</p>
-          <p>{media.client || "Personal project"}</p>
-        </div>
-        <div className="flex justify-between">
-          <div>
-            <p className="opacity-50">ROLE</p>
-            <p>{media.role || "Not specified"}</p>
-          </div>
-          <div className="text-right">
-            <p className="opacity-50">YEAR</p>
-            <p>{media.year || "x"}</p>
-          </div>
-        </div>
+      <div className="w-full px-4 sm:px-6 lg:px-8 pb-8 text-base">
+        <ul className="space-y-1">
+          <li>
+            Title:{" "}
+            <span className="opacity-50">{media.title || "Untitled"}</span>
+          </li>
+          <li>
+            Agency: <span className="opacity-50">{media.agency || "None"}</span>
+          </li>
+          <li>
+            Client: <span className="opacity-50">{media.client || "None"}</span>
+          </li>
+          <li>
+            Role:{" "}
+            <span className="opacity-50">{media.role || "Not specified"}</span>
+          </li>
+          <li>
+            Year: <span className="opacity-50">{media.year || "x"}</span>
+          </li>
+        </ul>
       </div>
     </div>
   );

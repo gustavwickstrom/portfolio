@@ -60,7 +60,28 @@ export default function FilmDetail(props) {
         }`}
       >
         <div className="flex flex-col gap-y-2 mt-10 text-left">
-          <h1 className="text-6xl lg:text-9xl font-bold mb-8">{film.title}</h1>
+          <h1 className="text-6xl lg:text-9xl font-bold mb-8 uppercase">{film.title}</h1>
+          <ul className="space-y-1 text-base md:text-headline">
+            <li>
+              Year: <span className="opacity-50">{film.year || "x"}</span>
+            </li>
+            <li>
+              Client:{" "}
+              <span className="opacity-50">
+                {film.client || "Personal project"}
+              </span>
+            </li>
+            <li>
+              Agency:{" "}
+              <span className="opacity-50">
+                {film.agency || "Solo project"}
+              </span>
+            </li>
+            <li>
+              Role:{" "}
+              <span className="opacity-50">{film.role || "Not specified"}</span>
+            </li>
+          </ul>
         </div>
 
         <video
@@ -75,27 +96,8 @@ export default function FilmDetail(props) {
           Your browser does not support the video tag.
         </video>
 
-        <div className="w-full text-base grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-8 my-10">
-          <div>
-            <p className="opacity-50">AGENCY</p>
-            <p>{film.agency || "NONE"}</p>
-          </div>
-          <div>
-            <p className="opacity-50">CLIENT</p>
-            <p>{film.client || "PERSONAL PROJECT"}</p>
-          </div>
-          <div>
-            <p className="opacity-50">ROLE</p>
-            <p>{film.role || "NOT SPECIFIED"}</p>
-          </div>
-          <div className="">
-            <p className="opacity-50">YEAR</p>
-            <p>{film.year || "NOT SPECIFIED"}</p>
-          </div>
-        </div>
-
         {film.stills && film.stills.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {film.stills.map((src, i) => (
               <img
                 key={i}

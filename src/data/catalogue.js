@@ -8,6 +8,14 @@ const catalogue = [
     year: "2025",
   },
   {
+    src: "/images/nike.jpg",
+    title: "Nike",
+    agency: "",
+    client: "",
+    role: "PHOTOGRAPHER",
+    year: "2025",
+  },
+  {
     src: "/images/DSC02129.webp",
     title: "OLIVER",
     agency: "",
@@ -30,6 +38,14 @@ const catalogue = [
     client: "",
     role: "Photographer",
     year: "2022",
+  },
+  {
+    src: "/images/marshall.jpg",
+    title: "Marshall",
+    agency: "",
+    client: "",
+    role: "PHOTOGRAPHER",
+    year: "2025",
   },
   {
     src: "/images/DSC01749.webp",
@@ -63,6 +79,14 @@ const catalogue = [
     role: "",
     year: ""
   },  
+  {
+    src: "/images/marshall2.jpg",
+    title: "Marshall 2",
+    agency: "",
+    client: "",
+    role: "PHOTOGRAPHER",
+    year: "2025",
+  },
 ];
 
 export default catalogue;

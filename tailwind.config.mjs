@@ -31,10 +31,10 @@ export default {
         section: '6rem',
         gutter: '1.5rem',
       },
-    },
+    },    
   },
   plugins: [
     require('tailwind-scrollbar-hide'),
-    aspectRatio, // ← här lägger vi till pluginen!
+    aspectRatio,
   ],
 };

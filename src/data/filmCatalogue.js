@@ -1,6 +1,6 @@
 const filmCatalogue = [
   {
-    title: "FILIP WICKSTRÖM",
+    title: "Filip Wickström",
     slug: "filip-wickstrom",
     agency: "",
     client: "",
@@ -60,7 +60,7 @@ const filmCatalogue = [
     slug: "oliver-blazevic",
     agency: "",
     client: "",
-    role: "DOP | COLORIST | EDITOR",
+    role: "DOP, Colorist, Editor",
     year: "",
     videoUrl: "/film/oliver/oliver.mp4",
     thumbnail: "/film/oliver/oliver-thumbnail.jpg",
