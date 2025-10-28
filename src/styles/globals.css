@@ -6,13 +6,8 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #111111;
-  }
-
-  .dark {
-    --background: #121212;
-    --foreground: #eeeeee;
+    --background: #000000;
+    --foreground: #ffffff;
   }
 
   html,
