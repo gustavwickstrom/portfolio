@@ -6,7 +6,7 @@ export default function Header() {
       <div className="mx-auto flex items-start justify-between py-8">
         {/* Vänster: Namn + undertitel */}
         <div>
-          <Link href="/" className="text-yellow-300">
+          <Link href="/" className="text-blue-600">
             Gustav Wickström
           </Link>
           <p className="text-sm text-gray-500">Photographer and Filmmaker</p>
