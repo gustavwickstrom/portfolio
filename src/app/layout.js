@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="sv">
       <body className="bg-background text-foreground">
         {/* Global container */}
-        <div className="mx-auto max-w-screen-xl px-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
           <Header />
           <main className="py-6 sm:py-8 lg:py-12">{children}</main>
           <Footer />

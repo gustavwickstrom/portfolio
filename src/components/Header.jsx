@@ -26,9 +26,14 @@ export default function Header() {
             Info
           </Link>
 
-          <Link href="/info" className="hover:underline">
+          <a
+            href="https://www.instagram.com/gustavwickstrom/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
             IG
-          </Link>
+          </a>
         </nav>
       </div>
     </header>

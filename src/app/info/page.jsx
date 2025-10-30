@@ -1,7 +1,7 @@
 export default function Page() {
   return (
     <main>
-      <h1>Info</h1>
+      <p>Photographer and filmmaker from Kalmar, Sweden. Located in Jönköping. Represented by Ny Studio & Saga Production</p>
     </main>
   );
 }
