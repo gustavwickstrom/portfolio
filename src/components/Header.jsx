@@ -108,21 +108,21 @@ export default function Header() {
             <Link
               href="/"
               onClick={closeMenu}
-              className="text-6xl sm:text-4xl hover:opacity-80"
+              className="text-4xl sm:text-4xl hover:opacity-80"
             >
               Film
             </Link>
             <Link
               href="/stills"
               onClick={closeMenu}
-              className="text-6xl sm:text-4xl hover:opacity-80"
+              className="text-4xl sm:text-4xl hover:opacity-80"
             >
               Stills
             </Link>
             <Link
               href="/info"
               onClick={closeMenu}
-              className="text-6xl sm:text-4xl hover:opacity-80"
+              className="text-4xl sm:text-4xl hover:opacity-80"
             >
               Info
             </Link>
@@ -131,7 +131,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={closeMenu}
-              className="text-6xl sm:text-4xl hover:opacity-80"
+              className="text-4xl sm:text-4xl hover:opacity-80"
             >
               Insta
             </a>
