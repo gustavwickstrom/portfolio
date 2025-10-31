@@ -35,7 +35,7 @@ export default function StillsGallery({ images }) {
   const selected = selectedIndex !== null ? images[selectedIndex] : null;
 
   return (
-    <main className="mx-auto max-w-screen-xl relative">
+    <main className="mx-auto relative">
       {/* Masonry layout */}
       <div className="columns-2 lg:columns-3 gap-10">
         {images.map(({ file, width, height }, i) => {
@@ -64,45 +64,24 @@ export default function StillsGallery({ images }) {
       {selected && (
         <div
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center px-4 cursor-zoom-out"
-          onClick={close} // Klick var som helst stänger
+          onClick={close} // klick var som helst stänger
         >
-          {/* Bildcontainer */}
-          <div
-            className="relative w-[92vw] max-w-6xl h-[82vh] cursor-default"
-            // ingen stopPropagation längre!
-          >
+          {/* Behåll luften runt bilden */}
+          <div className="relative w-[92vw] max-w-6xl h-[82vh] pointer-events-none">
             <Image
               src={`/images/stills/${selected.file}`}
               alt={selected.file}
               fill
-              className="object-contain pointer-events-none select-none"
+              className="object-contain select-none"
               sizes="100vw"
               priority
             />
           </div>
 
-          {/* Caption */}
+          {/* Caption (klick här stänger också) */}
           <p className="absolute bottom-6 text-sm text-gray-400 tracking-wide select-none">
             {selected.file}
           </p>
-
-          {/* Navigationszoner (vänster/höger sida) */}
-          <button
-            aria-label="Previous"
-            className="absolute inset-y-0 left-0 w-1/2 cursor-[w-resize] outline-none"
-            onClick={(e) => {
-              e.stopPropagation(); // stoppar bara för att undvika att stänga
-              prev();
-            }}
-          />
-          <button
-            aria-label="Next"
-            className="absolute inset-y-0 right-0 w-1/2 cursor-[e-resize] outline-none"
-            onClick={(e) => {
-              e.stopPropagation();
-              next();
-            }}
-          />
         </div>
       )}
     </main>
