@@ -1,19 +1,25 @@
+// src/app/stills/page.jsx
 import fs from "fs";
 import path from "path";
 import { imageSize } from "image-size";
-import StillsGallery from "./StillsGallery";
+import LightboxGallery from "@/components/LightboxGallery";
 
 export default function Page() {
   const dir = path.join(process.cwd(), "public/images/stills");
   const files = fs.readdirSync(dir);
 
-  const images = files
+  const items = files
     .filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f))
     .map((file) => {
       const buffer = fs.readFileSync(path.join(dir, file));
       const { width = 0, height = 0 } = imageSize(buffer);
-      return { file, width, height };
+      return {
+        src: `/images/stills/${file}`,
+        width,
+        height,
+        alt: file,
+      };
     });
 
-  return <StillsGallery images={images} />;
+  return <LightboxGallery items={items} variant="masonry" />;
 }

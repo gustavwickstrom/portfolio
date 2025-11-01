@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     <header className="text-base relative z-40">
-      <div className="mx-auto flex items-start justify-between py-8">
+      <div className="mx-auto flex items- justify-between py-8">
         {/* Vänster: Namn + undertitel */}
         <div className="">
           <Link href="/" className="text-big">
@@ -112,15 +112,6 @@ export default function Header() {
             >
               Info
             </Link>
-            <a
-              href="https://www.instagram.com/gustavwickstrom/"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={closeMenu}
-              className="text-big sm:text-4xl hover:opacity-80"
-            >
-              Insta
-            </a>
           </nav>
         </div>
       )}

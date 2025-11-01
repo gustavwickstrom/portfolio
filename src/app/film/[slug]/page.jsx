@@ -4,11 +4,12 @@ import Image from "next/image";
 import { imageSize } from "image-size";
 import { getFilm, getAllFilmSlugs } from "@/data/films";
 
-// 👇 lägg till reveal-komponenterna
-import RevealOnView from "@/components/RevealOnView";
+// Reveal för video/titel/credits
 import RevealItem from "@/components/RevealItem";
+// Återanvändbart galleri med lightbox + reveal
+import LightboxGallery from "@/components/LightboxGallery";
 
-// SSG: builda alla sidor
+// Bygg statiska paths
 export function generateStaticParams() {
   return getAllFilmSlugs().map((slug) => ({ slug }));
 }
@@ -18,7 +19,7 @@ export function generateMetadata({ params }) {
   const film = getFilm(params.slug);
   return {
     title: film ? `${film.title} — Gustav Wickström` : "Projekt",
-    credits: film?.credits ?? "Projekt",
+    description: film?.credits ?? "Projekt",
   };
 }
 
@@ -39,13 +40,17 @@ export default function FilmPage({ params }) {
       return { file, width, height };
     });
 
-  // Första bild som cover fallback
-  const cover =
-    images.find((i) => i.file.toLowerCase() === "cover.jpg") || images[0];
+  // Mappa om till LightboxGallerys format
+  const galleryItems = images.map(({ file, width, height }) => ({
+    src: `/images/film/${params.slug}/${file}`,
+    width,
+    height,
+    alt: file,
+  }));
 
   return (
     <main className="mx-auto">
-      {/* Video – reveal on view */}
+      {/* Video (Vimeo) med reveal */}
       <RevealItem
         as="div"
         delay={0}
@@ -53,11 +58,11 @@ export default function FilmPage({ params }) {
         style={{ aspectRatio: "16 / 9" }}
       >
         <iframe
-          // OBS: se till att din data har samma key (videoID vs videoId). Här använder vi videoID eftersom din kod gör det.
-          src={`https://player.vimeo.com/video/${film.videoID}`}
+          // OBS: säkerställ att din data använder "videoID" (eller byt här till videoId om din data gör det)
+          src={`https://player.vimeo.com/video/${film.videoID}?badge=0&autopause=0&title=0&byline=0&portrait=0`}
           className="absolute inset-0 w-full h-full"
           frameBorder="0"
-          allow="autoplay; fullscreen;"
+          allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
           title={film.title}
           loading="lazy"
@@ -80,37 +85,18 @@ export default function FilmPage({ params }) {
         </RevealItem>
       )}
 
-      {/* Stills-galleri (grid + 16:9 crop) */}
-      {images.length > 0 && (
+      {/* Stills-galleri – 16:9 rutnät (croppade thumbs) med lightbox som visar original (contain) */}
+      {galleryItems.length > 0 && (
         <section className="mt-10">
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {images.map(({ file }, i) => {
-              const src = `/images/film/${params.slug}/${file}`;
-              return (
-                <RevealItem
-                  key={file}
-                  as="div"
-                  delay={180 + Math.min(i * 60, 360)} // liten stagger
-                  className="relative w-full overflow-hidden"
-                  style={{ aspectRatio: "16 / 9" }}
-                >
-                  <Image
-                    src={src}
-                    alt={file}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    priority={false}
-                  />
-                </RevealItem>
-              );
-            })}
-          </div>
+          <LightboxGallery
+            items={galleryItems}
+            variant="grid-16x9" // croppad 16:9 i gridet
+            showHoverOverlay={true}
+            showCaption={false}
+            staggerBase={60}
+          />
         </section>
       )}
-
-      {/* Kickar igång reveal varje gång sidan monteras (även vid SPA-nav) */}
-      <RevealOnView />
     </main>
   );
 }
