@@ -37,7 +37,7 @@ export default function Page() {
               delay={Math.min(idx * 80, 320)} // subtil stagger
               className="group relative block"
             >
-              <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-100">
+              <div className="relative aspect-[3/2] w-full overflow-hidden bg-gray-100">
                 {cover ? (
                   <Image
                     src={cover.src}
