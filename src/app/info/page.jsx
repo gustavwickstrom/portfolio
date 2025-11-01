@@ -11,7 +11,7 @@ export default function Page() {
         className="relative w-full aspect-[3/4] max-w-md mx-auto overflow-hidden"
       >
         <Image
-          src="/images/profile.jpg"
+          src="/images/profile.webp"
           alt="Portrait of Gustav Wickström"
           fill
           className="object-cover"
