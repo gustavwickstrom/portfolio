@@ -1,6 +1,14 @@
 // Minimal data – lägg till fler projekt här
 export const films = [
   {
+    slug: "skate-comeback",
+    title: "Skate Comeback",
+    videoID: "1132795172",
+    credits: `Shot on SONY A7IV
+Film by GUSTAV WICKSTRÖM
+Featuring GUSTAV WICKSTRÖM`,
+  },
+  {
     slug: "everyday-getaway",
     title: "Everyday Getaway",
     videoID: "1131833421",
