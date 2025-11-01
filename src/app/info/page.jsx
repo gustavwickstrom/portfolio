@@ -74,7 +74,7 @@ export default function Page() {
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              Instagram
+              IG
             </a>{" "}
             /{" "}
             <a
@@ -83,7 +83,7 @@ export default function Page() {
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              YouTube
+              YT
             </a>
           </p>
         </RevealItem>
