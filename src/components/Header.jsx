@@ -25,13 +25,15 @@ export default function Header() {
 
   return (
     <header className="text-base relative z-40">
-      <div className="mx-auto flex items- justify-between py-8">
+      <div className="mx-auto flex justify-between py-8">
         {/* Vänster: Namn + undertitel */}
-        <div className="">
-          <Link href="/" className="text-big">
+        <div>
+          <Link href="/" className="text-big leading-tight">
             Gustav Wickström
           </Link>
-          <p className="text-sm text-gray-500">Photographer / Filmmaker / Colorist</p>
+          <p className="text-sm text-gray-500 -mt-1">
+            Photographer / Filmmaker / Colorist
+          </p>
         </div>
 
         {/* Desktop-nav */}
