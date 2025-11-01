@@ -19,12 +19,7 @@ export default function Page() {
         />
       </RevealItem>
 
-      <div className="py-12 space-y-6 sm:space-y-8">
-        {/* Location */}
-        <RevealItem as="section" delay={60} className="space-y-2">
-          <p>Småland, Sweden</p>
-        </RevealItem>
-
+      <div className="py-12 space-y-6 sm:space-y-5">
         {/* Representation */}
         <RevealItem as="section" delay={120} className="space-y-2">
           <p className="text-base">
@@ -47,6 +42,11 @@ export default function Page() {
               Saga Production
             </a>
           </p>
+        </RevealItem>
+
+        {/* Location */}
+        <RevealItem as="section" delay={60} className="space-y-2">
+          <p>Småland, Sweden</p>
         </RevealItem>
 
         {/* Contact */}

@@ -18,7 +18,7 @@ export default {
       },
       fontSize: {
         headline: ["36px", { lineHeight: "1.2", fontWeight: "400" }],
-        big: ["30px", { lineHeight: "1.6", fontWeight: "400" }],
+        big: ["20px", { lineHeight: "1.6", fontWeight: "400" }],
         base: ["14px", { lineHeight: "1.6", fontWeight: "400" }],
       },
       fontFamily: {

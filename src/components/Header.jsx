@@ -31,7 +31,7 @@ export default function Header() {
           <Link href="/" className="text-big leading-tight">
             Gustav Wickström
           </Link>
-          <p className="text-sm text-gray-500 -mt-1">
+          <p className="text-sm text-gray-500">
             Photographer / Filmmaker / Colorist
           </p>
         </div>
@@ -112,7 +112,7 @@ export default function Header() {
               onClick={closeMenu}
               className="text-big sm:text-4xl hover:opacity-80"
             >
-              Info
+              Info / Contact
             </Link>
           </nav>
         </div>
