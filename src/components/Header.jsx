@@ -43,7 +43,7 @@ export default function Header() {
             Stills
           </Link>
           <Link href="/info" className="hover:underline">
-            Info
+            Info / Contact
           </Link>
         </nav>
 
