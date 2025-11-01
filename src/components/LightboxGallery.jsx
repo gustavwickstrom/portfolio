@@ -8,18 +8,18 @@ import RevealItem from "@/components/RevealItem";
 /**
  * Reusable lightbox gallery
  * props:
- * - items: [{ src, width, height, alt }]  // width/height krävs för masonry
- * - variant: "masonry" | "grid-16x9"      // layout-variant
- * - staggerBase: number (ms)              // startdelays för reveal
- * - showHoverOverlay: boolean             // svart overlay på hover (desktop)
- * - showCaption: boolean                  // visa/dölj bildtext i lightbox
+ * - items: [{ src, width, height, alt }]
+ * - variant: "masonry" | "grid-16x9"
+ * - staggerBase: number (ms)
+ * - showHoverOverlay: boolean
+ * - showCaption: boolean
  */
 export default function LightboxGallery({
   items,
   variant = "masonry",
   staggerBase = 60,
   showHoverOverlay = true,
-  showCaption = true, // 👈 NY PROP (default: visa)
+  showCaption = true,
 }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [lbVisible, setLbVisible] = useState(false);
@@ -67,14 +67,14 @@ export default function LightboxGallery({
   return (
     <main className="mx-auto relative">
       {variant === "masonry" ? (
-        // Masonry – behåll originalproportioner
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 sm:gap-6 lg:gap-10">
+        // ✅ 2 kolumner på mobil, 3 på md+
+        <div className="columns-2 md:columns-3 gap-2 sm:gap-4 lg:gap-10">
           {items.map(({ src, width, height, alt = "" }, i) => (
             <RevealItem
               key={src}
               as="div"
               delay={i * staggerBase}
-              className="group relative mb-4 sm:mb-6 lg:mb-10 break-inside-avoid overflow-hidden cursor-zoom-in"
+              className="group relative mb-2 sm:mb-4 lg:mb-10 break-inside-avoid overflow-hidden cursor-zoom-in"
               onClick={() => open(i)}
             >
               <Image
@@ -83,7 +83,7 @@ export default function LightboxGallery({
                 width={width || 1200}
                 height={height || 800}
                 className="w-full h-auto"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
                 quality={70}
                 decoding="async"
                 priority={i === 0}
@@ -111,7 +111,7 @@ export default function LightboxGallery({
                 alt={alt || src}
                 fill
                 className="object-cover"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
                 quality={70}
                 decoding="async"
                 priority={i === 0}
@@ -151,7 +151,6 @@ export default function LightboxGallery({
             />
           </div>
 
-          {/* Caption (valfritt) */}
           {showCaption && (
             <p className="absolute bottom-6 text-sm text-gray-400 tracking-wide select-none">
               {selected.alt || selected.src}
@@ -160,7 +159,6 @@ export default function LightboxGallery({
         </div>
       )}
 
-      {/* Trigger reveal on mount / SPA-nav */}
       <RevealOnView />
     </main>
   );
