@@ -1,23 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import RevealOnView from "@/components/RevealOnView";
+import RevealItem from "@/components/RevealItem";
 
 export default function StillsGallery({ images }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   // --- Lightbox animation state ---
-  const [lbVisible, setLbVisible] = useState(false);  // styr fade/zoom in
-  const [lbClosing, setLbClosing] = useState(false);  // styr fade/zoom ut
+  const [lbVisible, setLbVisible] = useState(false);
+  const [lbClosing, setLbClosing] = useState(false);
 
   const open = (idx) => {
     setSelectedIndex(idx);
-    // vänta till overlay är monterad → trigga fade-in nästa frame
     requestAnimationFrame(() => setLbVisible(true));
   };
 
   const close = () => {
-    // animera ut, avmontera efter duration (200ms)
     setLbClosing(true);
     setLbVisible(false);
     setTimeout(() => {
@@ -27,7 +27,8 @@ export default function StillsGallery({ images }) {
   };
 
   const next = () => setSelectedIndex((i) => (i + 1) % images.length);
-  const prev = () => setSelectedIndex((i) => (i - 1 + images.length) % images.length);
+  const prev = () =>
+    setSelectedIndex((i) => (i - 1 + images.length) % images.length);
 
   // Tangentbordsnavigation (← → ESC)
   useEffect(() => {
@@ -45,33 +46,10 @@ export default function StillsGallery({ images }) {
   useEffect(() => {
     const mounted = selectedIndex !== null;
     document.body.style.overflow = mounted ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [selectedIndex]);
-
-  // --- Scroll reveal state ---
-  const [visibleSet, setVisibleSet] = useState(() => new Set());
-  const itemsRef = useRef([]);
-
-  useEffect(() => {
-    const els = itemsRef.current.filter(Boolean);
-    if (!els.length) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        setVisibleSet((prev) => {
-          const next = new Set(prev);
-          entries.forEach((en) => {
-            if (en.isIntersecting) next.add(Number(en.target.dataset.idx));
-          });
-          return next;
-        });
-      },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
-    );
-
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, [images?.length]);
 
   const selected = selectedIndex !== null ? images[selectedIndex] : null;
 
@@ -81,22 +59,15 @@ export default function StillsGallery({ images }) {
       <div className="columns-2 lg:columns-3 gap-4 sm:gap-6 lg:gap-10">
         {images.map(({ file, width, height }, i) => {
           const src = `/images/stills/${file}`;
-          const shown = visibleSet.has(i);
           return (
-            <div
+            <RevealItem
               key={file}
-              ref={(el) => (itemsRef.current[i] = el)}
-              data-idx={i}
-              className={[
-                "mb-4 sm:mb-6 lg:mb-10 break-inside-avoid overflow-hidden cursor-zoom-in",
-                // scroll reveal (respekt för prefers-reduced-motion)
-                "transition duration-700 ease-out will-change-transform motion-safe:",
-                shown
-                  ? "motion-safe:opacity-100 motion-safe:translate-y-0"
-                  : "motion-safe:opacity-0 motion-safe:translate-y-4"
-              ].join(" ")}
+              as="div"
+              delay={i * 60}
+              className="group relative mb-4 sm:mb-6 lg:mb-10 break-inside-avoid overflow-hidden cursor-zoom-in"
               onClick={() => open(i)}
             >
+              {/* Bild */}
               <Image
                 src={src}
                 alt={file}
@@ -106,7 +77,17 @@ export default function StillsGallery({ images }) {
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 priority={i < 3}
               />
-            </div>
+
+              {/* Hover overlay (endast desktop) */}
+              <div
+                className="
+                  pointer-events-none absolute inset-0 
+                  hidden sm:block bg-black/40 
+                  opacity-0 group-hover:opacity-100
+                  transition-opacity duration-300
+                "
+              />
+            </RevealItem>
           );
         })}
       </div>
@@ -117,7 +98,7 @@ export default function StillsGallery({ images }) {
           className={[
             "fixed inset-0 z-50 bg-black/90 flex items-center justify-center px-4 cursor-zoom-out",
             "transition-opacity duration-200",
-            lbVisible && !lbClosing ? "opacity-100" : "opacity-0"
+            lbVisible && !lbClosing ? "opacity-100" : "opacity-0",
           ].join(" ")}
           onClick={close}
         >
@@ -126,7 +107,7 @@ export default function StillsGallery({ images }) {
             className={[
               "relative w-[92vw] max-w-6xl h-[82vh] pointer-events-none",
               "transition-transform duration-200",
-              lbVisible && !lbClosing ? "scale-100" : "scale-95"
+              lbVisible && !lbClosing ? "scale-100" : "scale-95",
             ].join(" ")}
           >
             <Image
@@ -145,6 +126,9 @@ export default function StillsGallery({ images }) {
           </p>
         </div>
       )}
+
+      {/* Kickar igång reveal vid sidmontage / SPA-nav */}
+      <RevealOnView />
     </main>
   );
 }

@@ -9,6 +9,7 @@ export default {
   ],
 
   safelist: ["opacity-0", "opacity-100", "translate-y-0", "translate-y-20"],
+
   theme: {
     extend: {
       colors: {
@@ -34,7 +35,20 @@ export default {
         section: "6rem",
         gutter: "1.5rem",
       },
+
+      // 👇 Lägg till detta
+      keyframes: {
+        rotateOnce: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+      },
+      animation: {
+        // 1 varv, 1s, ease-in-out, behåll sista frame ("both")
+        rotateOnce: "rotateOnce 1s ease-in-out 1 both",
+      },
     },
   },
+
   plugins: [require("tailwind-scrollbar-hide"), aspectRatio],
 };

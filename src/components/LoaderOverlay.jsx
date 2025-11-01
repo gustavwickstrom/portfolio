@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function LoaderOverlay() {
   const [visible, setVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
 
-  // Starta tidslinjen: visa direkt → efter 1s börja fadea → ta bort efter 1.8s
   useEffect(() => {
-    const t1 = setTimeout(() => setFadeOut(true), 1000);
+    const t1 = setTimeout(() => setFadeOut(true), 1000); // efter varvet
     const t2 = setTimeout(() => setVisible(false), 1800);
     return () => {
       clearTimeout(t1);
@@ -16,16 +16,14 @@ export default function LoaderOverlay() {
     };
   }, []);
 
-  // Mjuk scroll-lock: bara overflow hidden på <html> under overlay
   useEffect(() => {
-    if (visible) {
-      const html = document.documentElement;
-      const prev = html.style.overflow;
-      html.style.overflow = "hidden";
-      return () => {
-        html.style.overflow = prev;
-      };
-    }
+    if (!visible) return;
+    const html = document.documentElement;
+    const prev = html.style.overflow;
+    html.style.overflow = "hidden";
+    return () => {
+      html.style.overflow = prev;
+    };
   }, [visible]);
 
   if (!visible) return null;
@@ -37,21 +35,26 @@ export default function LoaderOverlay() {
       className={[
         "fixed inset-0 z-[9999] bg-black text-white",
         "flex items-center justify-center select-none",
-        "transition-opacity duration-500 ease-out",
+        "transition-opacity duration-700 ease-out",
         fadeOut ? "opacity-0" : "opacity-100",
       ].join(" ")}
-      // vi behöver inte blockera wheel/touch — overflow:hidden räcker
     >
-      <span
+      <div
         className={[
-          "font-semibold tracking-tight",
+          "origin-center will-change-transform",
+          "motion-safe:animate-rotateOnce", // 👈 ny animering
           "transition-transform duration-700 ease-out",
           fadeOut ? "scale-110 opacity-90" : "scale-100 opacity-100",
-          "text-4xl sm:text-5xl",
         ].join(" ")}
       >
-        🟦 GW
-      </span>
+        <Image
+          src="/images/sun.svg"
+          alt="Loader icon"
+          width={80}
+          height={80}
+          priority
+        />
+      </div>
     </div>
   );
 }

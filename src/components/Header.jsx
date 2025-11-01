@@ -4,22 +4,18 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Header() {
-  const [menuMounted, setMenuMounted] = useState(false); // styr om overlayen finns i DOM
-  const [menuOpen, setMenuOpen] = useState(false); // styr själva opaciteten (fade)
+  const [menuMounted, setMenuMounted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Öppna menyn: mounta → nästa frame: sätt open=true (triggar fade-in)
   const openMenu = () => {
     setMenuMounted(true);
     requestAnimationFrame(() => setMenuOpen(true));
   };
-
-  // Stäng menyn: sätt open=false (fade-out) → avmontera efter 200ms
   const closeMenu = () => {
     setMenuOpen(false);
-    setTimeout(() => setMenuMounted(false), 200); // duration matchar klasserna nedan
+    setTimeout(() => setMenuMounted(false), 200);
   };
 
-  // Lås scroll när overlayen är monterad
   useEffect(() => {
     document.body.style.overflow = menuMounted ? "hidden" : "";
     return () => {
@@ -31,8 +27,8 @@ export default function Header() {
     <header className="text-base relative z-40">
       <div className="mx-auto flex items-start justify-between py-8">
         {/* Vänster: Namn + undertitel */}
-        <div>
-          <Link href="/" className="text-blue-600">
+        <div className="">
+          <Link href="/" className="text-big">
             Gustav Wickström
           </Link>
           <p className="text-sm text-gray-500">Photographer and Filmmaker</p>
@@ -49,19 +45,11 @@ export default function Header() {
           <Link href="/info" className="hover:underline">
             Info
           </Link>
-          <a
-            href="https://www.instagram.com/gustavwickstrom/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
-            Insta
-          </a>
         </nav>
 
         {/* Mobil: Menu-knapp */}
         <button
-          className="md:hidden text-white hover:underline"
+          className="md:hidden hover:underline"
           onClick={openMenu}
           aria-expanded={menuMounted}
           aria-label="Open menu"
@@ -75,14 +63,13 @@ export default function Header() {
         <div
           role="dialog"
           aria-modal="true"
-          onClick={closeMenu} // klick var som helst stänger
+          onClick={closeMenu}
           className={[
             "fixed inset-0 z-50 bg-black text-white flex items-center justify-center",
-            "transition-opacity duration-200", // <-- fade
+            "transition-opacity duration-200",
             menuOpen ? "opacity-100" : "opacity-0",
           ].join(" ")}
         >
-          {/* Close-knapp i hörnet */}
           <button
             className="absolute top-6 right-6 text-3xl leading-none hover:opacity-70 transition"
             onClick={(e) => {
@@ -94,7 +81,6 @@ export default function Header() {
             ×
           </button>
 
-          {/* Innehåll – stoppa klick så länkar inte bubblar upp */}
           <nav
             onClick={(e) => e.stopPropagation()}
             className={[
@@ -108,21 +94,21 @@ export default function Header() {
             <Link
               href="/"
               onClick={closeMenu}
-              className="text-4xl sm:text-4xl hover:opacity-80"
+              className="text-big sm:text-4xl hover:opacity-80"
             >
               Film
             </Link>
             <Link
               href="/stills"
               onClick={closeMenu}
-              className="text-4xl sm:text-4xl hover:opacity-80"
+              className="text-big sm:text-4xl hover:opacity-80"
             >
               Stills
             </Link>
             <Link
               href="/info"
               onClick={closeMenu}
-              className="text-4xl sm:text-4xl hover:opacity-80"
+              className="text-big sm:text-4xl hover:opacity-80"
             >
               Info
             </Link>
@@ -131,7 +117,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={closeMenu}
-              className="text-4xl sm:text-4xl hover:opacity-80"
+              className="text-big sm:text-4xl hover:opacity-80"
             >
               Insta
             </a>

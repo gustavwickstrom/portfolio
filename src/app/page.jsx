@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { imageSize } from "image-size";
 import { films } from "@/data/films";
+import RevealOnView from "@/components/RevealOnView";
+import RevealItem from "@/components/RevealItem";
 
 function getCoverFor(slug) {
   const dir = path.join(process.cwd(), "public/images/film", slug);
@@ -12,7 +14,6 @@ function getCoverFor(slug) {
     .readdirSync(dir)
     .filter((f) => /\.(jpg|jpeg|png|webp|avif)$/i.test(f));
 
-  // cover.jpg prioriteras
   const coverName =
     files.find((f) => f.toLowerCase() === "cover.jpg") || files[0];
   if (!coverName) return null;
@@ -26,12 +27,14 @@ export default function Page() {
   return (
     <main className="mx-auto">
       <div className="grid grid-cols-1 gap-6 md:gap-10">
-        {films.map((film) => {
+        {films.map((film, idx) => {
           const cover = getCoverFor(film.slug);
           return (
-            <Link
+            <RevealItem
               key={film.slug}
+              as={Link}
               href={`/film/${film.slug}`}
+              delay={Math.min(idx * 80, 320)} // subtil stagger
               className="group relative block"
             >
               <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-100">
@@ -49,17 +52,19 @@ export default function Page() {
                     No cover
                   </div>
                 )}
-                <div
-                  className="absolute inset-0 hidden sm:flex items-center justify-center
-                                bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                >
+
+                {/* Hover-overlay (desktop) */}
+                <div className="absolute inset-0 hidden sm:flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <p className="text-white text-lg font-medium">{film.title}</p>
                 </div>
               </div>
-            </Link>
+            </RevealItem>
           );
         })}
       </div>
+
+      {/* Kickar igång reveal vid sidmontage / SPA-nav */}
+      <RevealOnView />
     </main>
   );
 }
