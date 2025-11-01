@@ -31,7 +31,7 @@ export default function Header() {
           <Link href="/" className="text-big">
             Gustav Wickström
           </Link>
-          <p className="text-sm text-gray-500">Photographer and Filmmaker</p>
+          <p className="text-sm text-gray-500">Photographer / Filmmaker / Colorist</p>
         </div>
 
         {/* Desktop-nav */}
