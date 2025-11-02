@@ -33,7 +33,7 @@ export default function LoaderOverlay() {
       role="status"
       aria-live="polite"
       className={[
-        "fixed inset-0 z-[9999] bg-black text-white",
+        "fixed inset-0 z-[9999] bg-background text-foreground",
         "flex items-center justify-center select-none",
         "transition-opacity duration-700 ease-out",
         fadeOut ? "opacity-0" : "opacity-100",

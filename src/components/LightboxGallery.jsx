@@ -1,25 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import RevealOnView from "@/components/RevealOnView";
 import RevealItem from "@/components/RevealItem";
 
 /**
  * Reusable lightbox gallery
  * props:
- * - items: [{ src, width, height, alt }]
- * - variant: "masonry" | "grid-16x9"
- * - staggerBase: number
- * - showHoverOverlay: boolean
- * - showCaption: boolean
+ * - items: [{ src, width, height, alt }]  // width/height krävs för masonry
+ * - variant: "masonry" | "grid-16x9"      // layout-variant
+ * - staggerBase: number (ms)              // startdelays för reveal
+ * - showHoverOverlay: boolean             // svart overlay på hover (desktop)
+ * - showCaption: boolean                  // visa/dölj bildtext i lightbox
  */
 export default function LightboxGallery({
   items,
   variant = "masonry",
   staggerBase = 60,
   showHoverOverlay = true,
-  showCaption = true,
+  showCaption = true, // 👈 NY PROP (default: visa)
 }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [lbVisible, setLbVisible] = useState(false);
@@ -41,7 +41,7 @@ export default function LightboxGallery({
   const prev = () =>
     setSelectedIndex((i) => (i - 1 + items.length) % items.length);
 
-  // Tangentbord
+  // keyboard
   useEffect(() => {
     const onKey = (e) => {
       if (selectedIndex === null) return;
@@ -53,38 +53,12 @@ export default function LightboxGallery({
     return () => window.removeEventListener("keydown", onKey);
   }, [selectedIndex, items.length]);
 
-  // 🔒 Robust scroll-lock (iOS-säkert + bevarar scrollposition)
-  const scrollYRef = useRef(0);
+  // scroll lock
   useEffect(() => {
-    if (selectedIndex === null) return;
-
-    const html = document.documentElement;
-    const body = document.body;
-
-    scrollYRef.current = window.scrollY;
-
-    const prevHtmlOverflow = html.style.overflow;
-    const prevHtmlOverscroll = html.style.overscrollBehavior;
-    const prevBodyOverflow = body.style.overflow;
-    const prevBodyPos = body.style.position;
-    const prevBodyTop = body.style.top;
-    const prevBodyWidth = body.style.width;
-
-    html.style.overflow = "hidden";
-    html.style.overscrollBehavior = "contain"; // stoppa rubber-band
-    body.style.overflow = "hidden";
-    body.style.position = "fixed";
-    body.style.top = `-${scrollYRef.current}px`;
-    body.style.width = "100%";
-
+    const mounted = selectedIndex !== null;
+    document.body.style.overflow = mounted ? "hidden" : "";
     return () => {
-      html.style.overflow = prevHtmlOverflow;
-      html.style.overscrollBehavior = prevHtmlOverscroll;
-      body.style.overflow = prevBodyOverflow;
-      body.style.position = prevBodyPos;
-      body.style.top = prevBodyTop;
-      body.style.width = prevBodyWidth;
-      window.scrollTo(0, scrollYRef.current);
+      document.body.style.overflow = "";
     };
   }, [selectedIndex]);
 
@@ -154,19 +128,11 @@ export default function LightboxGallery({
       {selected && (
         <div
           className={[
-            // fyll alltid hela visuella viewporten (även när URL-baren gömmer sig)
-            "fixed left-0 top-0 w-screen h-[100dvh] z-50",
-            "bg-black/90 flex items-center justify-center px-4 cursor-zoom-out",
+            "fixed inset-0 z-50 bg-black/90 flex items-center justify-center px-4 cursor-zoom-out",
             "transition-opacity duration-200",
             lbVisible && !lbClosing ? "opacity-100" : "opacity-0",
-            // blockera touch-scroll på overlayen
-            "touch-none select-none",
-            // safe area i botten
-            "pb-[env(safe-area-inset-bottom)]",
           ].join(" ")}
           onClick={close}
-          onTouchMove={(e) => e.preventDefault()}
-          onWheel={(e) => e.preventDefault()}
         >
           <div
             className={[
@@ -194,7 +160,7 @@ export default function LightboxGallery({
         </div>
       )}
 
-      {/* Kickar igång reveal vid sidmontage / SPA-nav */}
+      {/* Trigger reveal on mount / SPA-nav */}
       <RevealOnView />
     </main>
   );
