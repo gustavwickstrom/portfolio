@@ -25,7 +25,7 @@ function getCoverFor(slug) {
 
 export default function Page() {
   return (
-    <main className="mx-auto">
+    <main className="mx-auto max-w-screen-lg">
       <div className="grid grid-cols-1 gap-6 md:gap-24">
         {films.map((film, idx) => {
           const cover = getCoverFor(film.slug);

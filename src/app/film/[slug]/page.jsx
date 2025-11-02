@@ -49,7 +49,7 @@ export default function FilmPage({ params }) {
   }));
 
   return (
-    <main className="mx-auto">
+    <main className="mx-auto max-w-screen-lg">
       {/* Video (Vimeo) med reveal */}
       <RevealItem
         as="div"

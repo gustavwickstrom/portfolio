@@ -65,7 +65,7 @@ export default function LightboxGallery({
   const selected = selectedIndex !== null ? items[selectedIndex] : null;
 
   return (
-    <main className="mx-auto relative">
+    <main className="mx-auto relative max-w-screen-lg">
       {variant === "masonry" ? (
         // Masonry – behåll originalproportioner
         <div className="columns-2 sm:columns-2 lg:columns-3 gap-4 sm:gap-6 lg:gap-10">
