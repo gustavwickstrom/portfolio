@@ -11,20 +11,15 @@ import LightboxGallery from "@/components/LightboxGallery";
 // ✅ Tillåt att slugs som inte fanns vid build fortfarande kan fungera
 export const dynamicParams = true;
 
-// ✅ Bygg statiska paths (funkar oavsett om getAllFilmSlugs returnerar string eller {slug})
+// ✅ Bygg statiska paths
 export function generateStaticParams() {
   const slugs = getAllFilmSlugs();
-
-  return slugs.map((s) => {
-    if (typeof s === "string") return { slug: s };
-    if (s && typeof s === "object" && "slug" in s) return { slug: s.slug };
-    return { slug: String(s) };
-  });
+  return slugs.map((s) => ({ slug: String(s) }));
 }
 
 // ✅ SEO
 export function generateMetadata({ params }) {
-  const slug = decodeURIComponent(params.slug);
+  const slug = decodeURIComponent(params.slug).trim().toLowerCase();
   const film = getFilm(slug);
 
   return {
@@ -34,7 +29,7 @@ export function generateMetadata({ params }) {
 }
 
 export default function FilmPage({ params }) {
-  const slug = decodeURIComponent(params.slug);
+  const slug = decodeURIComponent(params.slug).trim().toLowerCase();
   const film = getFilm(slug);
 
   // ✅ Riktig Next 404
@@ -52,7 +47,6 @@ export default function FilmPage({ params }) {
         const { width = 0, height = 0 } = imageSize(buffer);
         return [{ file, width, height }];
       } catch {
-        // Om någon fil är trasig/skum: hoppa över den istället för att krascha builden
         return [];
       }
     });

@@ -36,8 +36,11 @@ Music by NEW ORDER`,
 ];
 
 export function getFilm(slug) {
-  return films.find((f) => f.slug === slug);
+  const s = decodeURIComponent(String(slug)).trim().toLowerCase();
+  return films.find((f) => String(f.slug).trim().toLowerCase() === s);
 }
+
+
 
 export function getAllFilmSlugs() {
   return films.map((f) => f.slug);
