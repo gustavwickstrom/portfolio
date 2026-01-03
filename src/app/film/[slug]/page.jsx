@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-import Image from "next/image";
 import { imageSize } from "image-size";
 import { notFound } from "next/navigation";
 
@@ -8,18 +7,16 @@ import { getFilm, getAllFilmSlugs } from "@/data/films";
 import RevealItem from "@/components/RevealItem";
 import LightboxGallery from "@/components/LightboxGallery";
 
-// ✅ Tillåt att slugs som inte fanns vid build fortfarande kan fungera
 export const dynamicParams = true;
 
-// ✅ Bygg statiska paths
 export function generateStaticParams() {
-  const slugs = getAllFilmSlugs();
-  return slugs.map((s) => ({ slug: String(s) }));
+  return getAllFilmSlugs().map((slug) => ({ slug }));
 }
 
-// ✅ SEO
-export function generateMetadata({ params }) {
-  const slug = decodeURIComponent(params.slug).trim().toLowerCase();
+// ✅ Gör generateMetadata async + awaita params (pga Turbopack/Next 16)
+export async function generateMetadata({ params }) {
+  const p = await params; // <-- viktigt
+  const slug = decodeURIComponent(String(p.slug)).trim().toLowerCase();
   const film = getFilm(slug);
 
   return {
@@ -28,14 +25,15 @@ export function generateMetadata({ params }) {
   };
 }
 
-export default function FilmPage({ params }) {
-  const slug = decodeURIComponent(params.slug).trim().toLowerCase();
+// ✅ Gör page async + awaita params (pga Turbopack/Next 16)
+export default async function FilmPage({ params }) {
+  const p = await params; // <-- viktigt
+  const slug = decodeURIComponent(String(p.slug)).trim().toLowerCase();
   const film = getFilm(slug);
 
-  // ✅ Riktig Next 404
   if (!film) notFound();
 
-  // ✅ Läs stillbilder från public/images/film/<slug>
+  // Läs stillbilder från public/images/film/<slug>
   const dir = path.join(process.cwd(), "public/images/film", slug);
   const files = fs.existsSync(dir) ? fs.readdirSync(dir) : [];
 
@@ -51,7 +49,6 @@ export default function FilmPage({ params }) {
       }
     });
 
-  // ✅ LightboxGallery-format
   const galleryItems = images.map(({ file, width, height }) => ({
     src: `/images/film/${slug}/${file}`,
     width,
@@ -61,7 +58,6 @@ export default function FilmPage({ params }) {
 
   return (
     <main className="mx-auto max-w-screen-lg">
-      {/* Video (Vimeo) */}
       <RevealItem
         as="div"
         delay={0}
@@ -79,12 +75,10 @@ export default function FilmPage({ params }) {
         />
       </RevealItem>
 
-      {/* Titel */}
       <RevealItem as="h1" delay={60} className="font-semibold">
         {film.title}
       </RevealItem>
 
-      {/* Credits */}
       {film.credits && (
         <RevealItem
           as="div"
@@ -95,7 +89,6 @@ export default function FilmPage({ params }) {
         </RevealItem>
       )}
 
-      {/* Stills */}
       {galleryItems.length > 0 && (
         <section className="mt-10">
           <LightboxGallery
