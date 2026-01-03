@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import aspectRatio from "@tailwindcss/aspect-ratio";
+import scrollbarHide from "tailwind-scrollbar-hide";
 
 export default {
   content: [
@@ -35,8 +36,6 @@ export default {
         section: "6rem",
         gutter: "1.5rem",
       },
-
-      // 👇 Lägg till detta
       keyframes: {
         rotateOnce: {
           "0%": { transform: "rotate(0deg)" },
@@ -44,11 +43,10 @@ export default {
         },
       },
       animation: {
-        // 1 varv, 1s, ease-in-out, behåll sista frame ("both")
         rotateOnce: "rotateOnce 1s ease-in-out 1 both",
       },
     },
   },
 
-  plugins: [require("tailwind-scrollbar-hide"), aspectRatio],
+  plugins: [scrollbarHide, aspectRatio],
 };
