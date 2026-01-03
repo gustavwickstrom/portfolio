@@ -25,22 +25,13 @@ export default function Page() {
           <p className="text-base">
             Represented by{" "}
             <a
-              href="https://www.nystudio.se/"
+              href="https://www.gracestudio.se/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              Ny Studio
+              Grace Studio
             </a>{" "}
-            and{" "}
-            <a
-              href="https://www.saga.se/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline"
-            >
-              Saga Production
-            </a>
           </p>
         </RevealItem>
 
@@ -53,10 +44,10 @@ export default function Page() {
         <RevealItem as="section" delay={180} className="space-y-2">
           <p className="text-base">
             <a
-              href="mailto:gustav.wickstrom@nystudio.com"
+              href="mailto:gustav.wickstrom@gracestudio.se"
               className="hover:underline"
             >
-              gustav.wickstrom@nystudio.com
+              gustav.wickstrom@gracestudio.se
             </a>
             <br />
             <a href="tel:+46738329324" className="hover:underline">
@@ -74,16 +65,16 @@ export default function Page() {
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              IG
+              Instagram
             </a>{" "}
             /{" "}
             <a
-              href="https://www.youtube.com/@gustavwickstroms"
+              href="https://www.linkedin.com/in/gustav-wickstr%C3%B6m-89350a208/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline"
             >
-              YT
+              LinkedIn
             </a>
           </p>
         </RevealItem>

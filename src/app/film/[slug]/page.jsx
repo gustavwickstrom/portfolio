@@ -79,7 +79,7 @@ export default function FilmPage({ params }) {
         <RevealItem
           as="div"
           delay={120}
-          className="mt-6 max-w-2xl text-base text-gray-700 whitespace-pre-line"
+          className="mt-6 max-w-2xl text-base text-gray-300 whitespace-pre-line"
         >
           {film.credits}
         </RevealItem>

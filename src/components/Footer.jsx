@@ -9,8 +9,13 @@ export default function Footer() {
         </Link>
 
         <nav className="flex items-center gap-6">
-          <Link href="/" className="hover:underline">
-            © 2025
+          <Link
+            href="https://www.instagram.com/gustavwickstrom/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            Instagram
           </Link>
         </nav>
       </div>

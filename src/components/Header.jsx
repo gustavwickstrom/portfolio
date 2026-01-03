@@ -32,7 +32,7 @@ export default function Header() {
             Gustav Wickström
           </Link>
           <p className="text-sm text-gray-500">
-            Photographer / Filmmaker / Colorist
+            Photographer & Filmmaker
           </p>
         </div>
 
