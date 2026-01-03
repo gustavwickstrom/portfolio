@@ -2,21 +2,31 @@ import fs from "fs";
 import path from "path";
 import Image from "next/image";
 import { imageSize } from "image-size";
-import { getFilm, getAllFilmSlugs } from "@/data/films";
+import { notFound } from "next/navigation";
 
-// Reveal för video/titel/credits
+import { getFilm, getAllFilmSlugs } from "@/data/films";
 import RevealItem from "@/components/RevealItem";
-// Återanvändbart galleri med lightbox + reveal
 import LightboxGallery from "@/components/LightboxGallery";
 
-// Bygg statiska paths
+// ✅ Tillåt att slugs som inte fanns vid build fortfarande kan fungera
+export const dynamicParams = true;
+
+// ✅ Bygg statiska paths (funkar oavsett om getAllFilmSlugs returnerar string eller {slug})
 export function generateStaticParams() {
-  return getAllFilmSlugs().map((slug) => ({ slug }));
+  const slugs = getAllFilmSlugs();
+
+  return slugs.map((s) => {
+    if (typeof s === "string") return { slug: s };
+    if (s && typeof s === "object" && "slug" in s) return { slug: s.slug };
+    return { slug: String(s) };
+  });
 }
 
-// SEO
+// ✅ SEO
 export function generateMetadata({ params }) {
-  const film = getFilm(params.slug);
+  const slug = decodeURIComponent(params.slug);
+  const film = getFilm(slug);
+
   return {
     title: film ? `${film.title} — Gustav Wickström` : "Projekt",
     description: film?.credits ?? "Projekt",
@@ -24,25 +34,32 @@ export function generateMetadata({ params }) {
 }
 
 export default function FilmPage({ params }) {
-  const film = getFilm(params.slug);
-  if (!film) {
-    return <main className="mx-auto">Not found</main>;
-  }
+  const slug = decodeURIComponent(params.slug);
+  const film = getFilm(slug);
 
-  // Läs stillbilder från public/images/film/<slug>
-  const dir = path.join(process.cwd(), "public/images/film", params.slug);
+  // ✅ Riktig Next 404
+  if (!film) notFound();
+
+  // ✅ Läs stillbilder från public/images/film/<slug>
+  const dir = path.join(process.cwd(), "public/images/film", slug);
   const files = fs.existsSync(dir) ? fs.readdirSync(dir) : [];
+
   const images = files
     .filter((f) => /\.(jpg|jpeg|png|webp|avif)$/i.test(f))
-    .map((file) => {
-      const buffer = fs.readFileSync(path.join(dir, file));
-      const { width = 0, height = 0 } = imageSize(buffer);
-      return { file, width, height };
+    .flatMap((file) => {
+      try {
+        const buffer = fs.readFileSync(path.join(dir, file));
+        const { width = 0, height = 0 } = imageSize(buffer);
+        return [{ file, width, height }];
+      } catch {
+        // Om någon fil är trasig/skum: hoppa över den istället för att krascha builden
+        return [];
+      }
     });
 
-  // Mappa om till LightboxGallerys format
+  // ✅ LightboxGallery-format
   const galleryItems = images.map(({ file, width, height }) => ({
-    src: `/images/film/${params.slug}/${file}`,
+    src: `/images/film/${slug}/${file}`,
     width,
     height,
     alt: file,
@@ -50,7 +67,7 @@ export default function FilmPage({ params }) {
 
   return (
     <main className="mx-auto max-w-screen-lg">
-      {/* Video (Vimeo) med reveal */}
+      {/* Video (Vimeo) */}
       <RevealItem
         as="div"
         delay={0}
@@ -58,7 +75,6 @@ export default function FilmPage({ params }) {
         style={{ aspectRatio: "16 / 9" }}
       >
         <iframe
-          // OBS: säkerställ att din data använder "videoID" (eller byt här till videoId om din data gör det)
           src={`https://player.vimeo.com/video/${film.videoID}?badge=0&autopause=0&title=0&byline=0&portrait=0`}
           className="absolute inset-0 w-full h-full"
           frameBorder="0"
@@ -74,7 +90,7 @@ export default function FilmPage({ params }) {
         {film.title}
       </RevealItem>
 
-      {/* Credits / beskrivning */}
+      {/* Credits */}
       {film.credits && (
         <RevealItem
           as="div"
@@ -85,12 +101,12 @@ export default function FilmPage({ params }) {
         </RevealItem>
       )}
 
-      {/* Stills-galleri – 16:9 rutnät (croppade thumbs) med lightbox som visar original (contain) */}
+      {/* Stills */}
       {galleryItems.length > 0 && (
         <section className="mt-10">
           <LightboxGallery
             items={galleryItems}
-            variant="grid-16x9" // croppad 16:9 i gridet
+            variant="grid-16x9"
             showHoverOverlay={true}
             showCaption={false}
             staggerBase={60}
