@@ -1,29 +1,83 @@
 // Minimal data – lägg till fler projekt här
 export const films = [
   {
+    slug: "lf-onskechecken",
+    title: "Länsförsäkringar Jönköping – Önskechecken",
+    videoID: "1151307374",
+    credits: `Client LÄNSFÖRSÄKRINGAR JÖNKÖPING
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project DOP & POST-PRODUCTION`,
+  },
+
+  {
+    slug: "jonkopings-lanstrafik-alternativtrafik",
+    title: "Jönköpings Länstrafik – Alternativtrafik",
+    videoID: "1151306827",
+    credits: `Client LÄNSFÖRSÄKRINGAR JÖNKÖPING
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project DOP & POST-PRODUCTION`,
+  },
+
+  {
+    slug: "lf-foretagskampanj",
+    title: "Länsförsäkringar Jönköping – Företagskampanj",
+    videoID: "1151307146",
+    credits: `Client LÄNSFÖRSÄKRINGAR JÖNKÖPING
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project POST-PRODUCTION`,
+  },
+
+  {
+    slug: "wernerssons-vinterkampanj",
+    title: "Wernerssons – Vinterkampanj",
+    videoID: "1151307714",
+    credits: `Client WERNERSSONS
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project DOP & POST-PRODUCTION`,
+  },
+
+  {
+    slug: "conform-afterwork",
+    title: "Conform – Afterwork",
+    videoID: "1151306580",
+    credits: `Client CONFORM
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project POST-PRODUCTION`,
+  },
+
+  {
+    slug: "nassjo-chark-hv-korven",
+    title: "Nässjö Chark – HV-korven",
+    videoID: "1151307501",
+    credits: `Client NÄSSJÖ CHARK
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project DOP & POST-PRODUCTION`,
+  },
+
+  {
     slug: "everyday-getaway",
     title: "Everyday Getaway",
     videoID: "1131833421",
     credits: `Shot on SONY A7IV
 Film by GUSTAV WICKSTRÖM
-Featuring DAVID LJUNG, MARKUS SJÖHAGE, DANIEL WENGEL`,
+Featuring DAVID LJUNG, MARKUS SJÖHAGE & DANIEL WENGEL`,
   },
+
   {
     slug: "skate-comeback",
     title: "Skate Comeback",
     videoID: "1132795172",
     credits: `Shot on SONY A7IV
 Film by GUSTAV WICKSTRÖM
-Featuring GUSTAV WICKSTRÖM`,
+Music PUNKROCKER – TEDDYBEARS, IGGY POP`,
   },
-  {
-    slug: "z33-blue",
-    title: "Z33 Blue",
-    videoID: "1132641136",
-    credits: `Shot on SONY A7IV
-Film by GUSTAV WICKSTRÖM
-Featuring OLIVER B`,
-  },
+
   {
     slug: "gravity-reversed",
     title: "Gravity Reversed",
@@ -31,7 +85,16 @@ Featuring OLIVER B`,
     credits: `Shot on SONY A7IV
 Film by GUSTAV WICKSTRÖM
 Featuring ANDREAS WAHLBERG
-Music by NEW ORDER`,
+Music ELEGIA – NEW ORDER`,
+  },
+
+  {
+    slug: "z33-blue",
+    title: "Z33 Blue",
+    videoID: "1132641136",
+    credits: `Shot on SONY A7IV
+Film by GUSTAV WICKSTRÖM
+Featuring OLIVER BLAŽEVIĆ`,
   },
 ];
 
@@ -39,8 +102,6 @@ export function getFilm(slug) {
   const s = decodeURIComponent(String(slug)).trim().toLowerCase();
   return films.find((f) => String(f.slug).trim().toLowerCase() === s);
 }
-
-
 
 export function getAllFilmSlugs() {
   return films.map((f) => f.slug);
