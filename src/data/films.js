@@ -2,59 +2,9 @@
 export const films = [
   {
     slug: "lf-onskechecken",
-    title: "Länsförsäkringar Jönköping – Önskechecken",
+    title: "Önskechecken – Länsförsäkringar Jönköping",
     videoID: "1151307374",
     credits: `Client LÄNSFÖRSÄKRINGAR JÖNKÖPING
-              Agency NY STUDIO
-              Production company SAGA PRODUCTION
-              Role in project DOP & POST-PRODUCTION`,
-  },
-
-  {
-    slug: "jonkopings-lanstrafik-alternativtrafik",
-    title: "Jönköpings Länstrafik – Alternativtrafik",
-    videoID: "1151306827",
-    credits: `Client LÄNSFÖRSÄKRINGAR JÖNKÖPING
-              Agency NY STUDIO
-              Production company SAGA PRODUCTION
-              Role in project DOP & POST-PRODUCTION`,
-  },
-
-  {
-    slug: "lf-foretagskampanj",
-    title: "Länsförsäkringar Jönköping – Företagskampanj",
-    videoID: "1151307146",
-    credits: `Client LÄNSFÖRSÄKRINGAR JÖNKÖPING
-              Agency NY STUDIO
-              Production company SAGA PRODUCTION
-              Role in project POST-PRODUCTION`,
-  },
-
-  {
-    slug: "wernerssons-vinterkampanj",
-    title: "Wernerssons – Vinterkampanj",
-    videoID: "1151307714",
-    credits: `Client WERNERSSONS
-              Agency NY STUDIO
-              Production company SAGA PRODUCTION
-              Role in project DOP & POST-PRODUCTION`,
-  },
-
-  {
-    slug: "conform-afterwork",
-    title: "Conform – Afterwork",
-    videoID: "1151306580",
-    credits: `Client CONFORM
-              Agency NY STUDIO
-              Production company SAGA PRODUCTION
-              Role in project POST-PRODUCTION`,
-  },
-
-  {
-    slug: "nassjo-chark-hv-korven",
-    title: "Nässjö Chark – HV-korven",
-    videoID: "1151307501",
-    credits: `Client NÄSSJÖ CHARK
               Agency NY STUDIO
               Production company SAGA PRODUCTION
               Role in project DOP & POST-PRODUCTION`,
@@ -70,12 +20,62 @@ Featuring DAVID LJUNG, MARKUS SJÖHAGE & DANIEL WENGEL`,
   },
 
   {
+    slug: "nassjo-chark-hv-korven",
+    title: "HV-korven, en smak av matchen – Nässjö Chark",
+    videoID: "1151307501",
+    credits: `Client NÄSSJÖ CHARK
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project DOP & POST-PRODUCTION`,
+  },
+
+  {
+    slug: "lf-foretagskampanj",
+    title: "Företagskampanj – Länsförsäkringar Jönköping",
+    videoID: "1151307146",
+    credits: `Client LÄNSFÖRSÄKRINGAR JÖNKÖPING
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project POST-PRODUCTION`,
+  },
+
+  {
+    slug: "conform-afterwork",
+    title: "Afterwork – Conform",
+    videoID: "1151306580",
+    credits: `Client CONFORM
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project POST-PRODUCTION`,
+  },
+
+  {
     slug: "skate-comeback",
     title: "Skate Comeback",
     videoID: "1132795172",
     credits: `Shot on SONY A7IV
 Film by GUSTAV WICKSTRÖM
 Music PUNKROCKER – TEDDYBEARS, IGGY POP`,
+  },
+
+  {
+    slug: "jonkopings-lanstrafik-alternativtrafik",
+    title: "Alternativtrafik – Jönköpings Länstrafik",
+    videoID: "1151306827",
+    credits: `Client LÄNSFÖRSÄKRINGAR JÖNKÖPING
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project DOP & POST-PRODUCTION`,
+  },
+
+  {
+    slug: "wernerssons-vinterkampanj",
+    title: "Vinterkampanj – Wernerssons",
+    videoID: "1151307714",
+    credits: `Client WERNERSSONS
+              Agency NY STUDIO
+              Production company SAGA PRODUCTION
+              Role in project DOP & POST-PRODUCTION`,
   },
 
   {
